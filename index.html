@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Build and manage your custom football team with dynamic formations, player stats, chemistry calculations, and more. An interactive Ultimate Team management app.">
+  <meta name="keywords" content="football team, team management, player stats, chemistry calculation, formations, ultimate team, dynamic app">
+  <meta name="author" content="FI">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/pitch.css">
+  <script src="js/tailwind.js"></script>
+</head>
+<body>
+ 
+  <div class="flex flex-col gap-y-20 lg:flex-row items-center justify-center">
+    <!-- campo container -->
+    <div class="campo_container flex w-[150%] lg:w-7/12 md:w-full">
+      <div class="campo mt-20 lg:mt-32 md:mt-40"  >
+        <div class="corner">
+          <div class="corner1"></div>
+          <div class="corner2"></div>
+        </div>
+        <div class="semi1"></div>
+        <div class="semi2"></div>
+        <div class="divisoria"></div>
+        <div class="interior"></div>
+        <div class="penalty"></div>
+      </div>
+    </div>
+    <!-- substitutes container -->
+    <div class="bg-[#1E5128] m-auto w-full lg:w-1/3 md:w-1/2  text-[#eee] flex flex-col items-center">
+      <h1>Substitutes</h1>
+       <div class="cards grid grid-cols-3">
+        <!-- card1 -->
+        <div class="player_card relative text-black">
+          <img src="src/assets/img/badge_gold.webp" alt="">
+          <!-- position and number -->
+          <div class="player_positoin flex flex-col absolute top-[25%] left-[15%]">
+            <p class="text-[10px] lg:text-sm font-bold">90</p>
+            <p class="text-[8px] lg:text-xs">CF</p> 
+          </div>
+          <!-- image -->
+          <div class="player_image w-2/3 absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <img src="https://cdn.sofifa.net/players/158/023/25_120.png" alt="">
+          </div>
+          <!-- name and more -->
+          <div class="w-4/5 flex flex-col items-center absolute top-[62%] left-[10%]">
+            <p class="text-[8px] lg:text-xs md:text-xs font-bold">Messi</p>
+            <!-- player statistics -->
+            <div class="palyer_statistics w-full flex flex-row justify-around text-[6px] lg:text-[7px] md:text-[7px]">
+              <div class="flex flex-col items-center">
+                <p class="font-semibold">PAC</p>
+                <p class="font-extrabold">80</p> 
+              </div>
+              <div class="flex flex-col items-center">
+                <p class="font-semibold">SHO</p>
+                <p class="font-extrabold">87</p> 
+              </div>
+              <div class="flex flex-col items-center">
+                <p class="font-semibold">PAS</p>
+                <p class="font-extrabold">90</p> 
+              </div>
+              <div class="flex flex-col items-center">
+                <p class="font-semibold">DRI</p>
+                <p class="font-extrabold">94</p> 
+              </div>
+              <div class="flex flex-col items-center">
+                <p class="font-semibold">DEF</p>
+                <p class="font-extrabold">33</p> 
+              </div>
+              <div class="flex flex-col items-center">
+                <p class="font-semibold">PHY</p>
+                <p class="font-extrabold">64</p> 
+              </div>
+            </div>
+            <!-- flags -->
+            <div class="palyer_statistics w-full flex flex-row justify-center gap-2">
+              <img src="https://cdn.sofifa.net/flags/pt.png" width="10%" alt="">
+              <img src="https://cdn.sofifa.net/meta/team/271/30.png" width="10%" alt="">
+              <img src="https://cdn.sofifa.net/meta/team/2506/120.png" width="10%" alt="">
+            </div>
+          </div>
+        </div>
+
+        <!-- card2 -->
+        <div class="player_card relative text-black">
+          <img src="src/assets/img/badge_gold.webp" alt="">
+          <!-- position and number -->
+          <div class="player_positoin flex flex-col absolute top-[20%] left-[10%]">
+            <p class="text-xs font-bold">90</p>
+            <p class="text-[10px]">CF</p> 
+          </div>
+          <!-- image -->
+          <div class="player_image w-2/3 absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <img src="https://cdn.sofifa.net/players/158/023/25_120.png" alt="">
+          </div>
+          <!-- name and more -->
+          <div class="flex flex-col absolute top-[60%] left-[10%]">
+            <p class="text-xs">Messi</p>
+            <div class="flex flex-col text-[10px]">
+              <p class=" font-bold">PAC</p>
+              <p class="">80</p> 
+            </div>
+          </div>
+        </div>
+       </div>
+    </div>
+  </div>
+</body>
+</html>
