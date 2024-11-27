@@ -5,7 +5,7 @@
   width: 0;
 }
 /* Campo */
-.campo{
+.campo {
   transform: rotate(90deg);
   position: relative;
   display: inline-block;
@@ -13,7 +13,7 @@
   height: 0;
   margin: 0 0 0 0 !important;
   padding: 0 0 75% 0 !important;
-  background: #1E5128;
+  background: #2a4b3b;
 }
 /* Marcas interiores */
 .interior, .divisoria,
@@ -87,7 +87,7 @@
   display: block;
   width: 16%;
   height: 50%;
-  background: #1E5128;
+  background: #2a4b3b;
   border: 2px solid #eee;
 }
 /* Area penalty derecha*/
@@ -147,4 +147,14 @@
   bottom: -6%;
   left: auto;
   right: -4%;
+}
+
+
+/* hide  scroll bar */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hidden {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
 }
