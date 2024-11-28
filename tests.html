@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Player Photo Input</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-800 flex justify-center items-center h-screen">
+
+  <!-- Custom "Choose Photo" Button -->
+  <label for="playerPhotoInput" class="bg-green-600 text-white py-2 px-6 rounded-lg cursor-pointer hover:bg-green-700">
+    Choose Photo
+  </label>
+  <input type="file" id="playerPhotoInput" accept="image/*" class="hidden" />
+
+  <!-- Image Preview -->
+  <img id="playerPhotoPreview" class="mt-4 max-w-xs hidden" src="" alt="Player Photo Preview" />
+
+  <script>
+    // Handle image preview
+    document.getElementById("playerPhotoInput").addEventListener("change", function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const imgElement = document.getElementById("playerPhotoPreview");
+          imgElement.src = e.target.result;
+          imgElement.classList.remove("hidden"); // Show image preview
+        };
+        reader.readAsDataURL(file); // Read the file as a data URL
+      }
+    });
+  </script>
+
+</body>
+</html>

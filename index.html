@@ -12,8 +12,11 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
 </head>
 <body class="bg-[#191919]">
- 
-  <div class="flex flex-col gap-y-20 lg:flex-row md:flex-row items-center justify-start ">
+  <!-- header -->
+   <header class="bg-[#2a4b3b] h-20 flex items-center justify-end p-10">
+    <button onclick="addPlayer()" class="p-2 text-[#eee] border-2 rounded-lg focus:outline-none hover:bg-[#191919]">Add Player</button>
+   </header>
+  <div class="flex flex-col gap-y-20  :flex-row md:flex-row items-center justify-start ">
     <!-- campo container -->
     <div class="campo_container relative pt-20 lg:pt-32 md-pt-40 w-full lg:w-7/12 md:w-4/5" style="max-height: 1000px;">
       <div class="campo h-full"  >
@@ -29,7 +32,7 @@
       </div>
       <!-- formation 4,3,3 by default -->
       <!-- gk -->
-      <div class="player_card relative text-black w-[32%] lg:w-[16%] scale-[0.3] lg:scale-[0.7]  translate-y-[-40%] left-[36%] lg:left-[42%]">
+      <div data-position="GK" class="player_card relative text-black w-[32%] lg:w-[16%] scale-[0.3] lg:scale-[0.7]  translate-y-[-40%] left-[36%] lg:left-[42%]">
         <img src="src/assets/img/badge_gold.webp" alt="">
         <!-- position and number -->
         <div class="player_positoin flex flex-col absolute top-[25%] left-[15%]">
@@ -80,100 +83,100 @@
         <div class="text-[#eee] text-center mt-[-20px] font-bold">GK</div>
       </div>
       <!-- LB -->
-      <div class="player_card relative text-black lg:w-[16%] lg:scale-[0.7] translate-y-[-210%] left-[15%]">
+      <div data-position="LB" class="player_card relative text-black lg:w-[16%] lg:scale-[0.7] translate-y-[-210%] left-[15%]">
         <img src="src/assets/img/badge_gold.webp" alt="">
-        <button class=" absolute top-1/2 left-[34%]">
-          <svg onclick="choosePlayerModal(event)" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
+        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
             <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
           </svg>
         </button>
         <div class="text-[#eee] text-center mt-[-20px] font-bold">LB</div>
       </div>
       <!-- CB1 -->
-      <div class="player_card relative text-black lg:w-[16%] lg:scale-[0.7] translate-y-[-310%] left-[30%]">
+      <div data-position="CB" class="player_card relative text-black lg:w-[16%] lg:scale-[0.7] translate-y-[-310%] left-[30%]">
         <img src="src/assets/img/badge_gold.webp" alt="">
-        <button class=" absolute top-1/2 left-[34%]">
-          <svg onclick="choosePlayerModal(event)" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
+        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
             <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
           </svg>
         </button>
-        <div class="text-[#eee] text-center mt-[-20px] font-bold">LB</div>
+        <div class="text-[#eee] text-center mt-[-20px] font-bold">CB</div>
       </div>
       <!-- CB2 -->
-      <div class="player_card relative text-black lg:w-[16%] lg:scale-[0.7] translate-y-[-410%] left-[55%]">
+      <div data-position="CB" class="player_card relative text-black lg:w-[16%] lg:scale-[0.7] translate-y-[-410%] left-[55%]">
         <img src="src/assets/img/badge_gold.webp" alt="">
-        <button class=" absolute top-1/2 left-[34%]">
-          <svg onclick="choosePlayerModal(event)" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
+        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
             <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
           </svg>
         </button>
-        <div class="text-[#eee] text-center mt-[-20px] font-bold">LB</div>
+        <div class="text-[#eee] text-center mt-[-20px] font-bold">CB</div>
       </div>
       <!-- RB -->
-      <div class="player_card relative text-black lg:w-[16%] lg:scale-[0.7] translate-y-[-510%] left-[70%]">
+      <div data-position="RB" class="player_card relative text-black lg:w-[16%] lg:scale-[0.7] translate-y-[-510%] left-[70%]">
         <img src="src/assets/img/badge_gold.webp" alt="">
-        <button class=" absolute top-1/2 left-[34%]">
-          <svg onclick="choosePlayerModal(event)" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
+        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
             <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
           </svg>
         </button>
-        <div class="text-[#eee] text-center mt-[-20px] font-bold">LB</div>
+        <div class="text-[#eee] text-center mt-[-20px] font-bold">RB</div>
       </div>
       <!-- CM1 -->
-      <div class="player_card relative text-black lg:w-[16%] lg:scale-[0.7] translate-y-[-710%] left-[30%]">
+      <div data-position="CM" class="player_card relative text-black lg:w-[16%] lg:scale-[0.7] translate-y-[-710%] left-[30%]">
         <img src="src/assets/img/badge_gold.webp" alt="">
-        <button class=" absolute top-1/2 left-[34%]">
-          <svg onclick="choosePlayerModal(event)" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
+        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
             <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
           </svg>
         </button>
         <div class="text-[#eee] text-center mt-[-20px] font-bold">CM</div>
       </div>
       <!-- CM2 -->
-      <div class="player_card relative text-black lg:w-[16%] lg:scale-[0.7] translate-y-[-810%] left-[55%]">
+      <div data-position="CM" class="player_card relative text-black lg:w-[16%] lg:scale-[0.7] translate-y-[-810%] left-[55%]">
         <img src="src/assets/img/badge_gold.webp" alt="">
-        <button class=" absolute top-1/2 left-[34%]">
-          <svg onclick="choosePlayerModal(event)" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
+        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
             <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
           </svg>
         </button>
         <div class="text-[#eee] text-center mt-[-20px] font-bold">CM</div>
       </div>
       <!-- CM3 -->
-      <div class="player_card relative text-black lg:w-[16%] lg:scale-[0.7] translate-y-[-970%] left-[42%]">
+      <div data-position="CM" class="player_card relative text-black lg:w-[16%] lg:scale-[0.7] translate-y-[-970%] left-[42%]">
         <img src="src/assets/img/badge_gold.webp" alt="">
-        <button class=" absolute top-1/2 left-[34%]">
-          <svg onclick="choosePlayerModal(event)" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
+        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
             <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
           </svg>
         </button>
         <div class="text-[#eee] text-center mt-[-20px] font-bold">CM</div>
       </div>
       <!-- LW -->
-      <div class="player_card relative text-black lg:w-[16%] lg:scale-[0.7] translate-y-[-1150%] left-[15%]">
+      <div data-position="LW" class="player_card relative text-black lg:w-[16%] lg:scale-[0.7] translate-y-[-1150%] left-[15%]">
         <img src="src/assets/img/badge_gold.webp" alt="">
-        <button class=" absolute top-1/2 left-[34%]">
-          <svg onclick="choosePlayerModal(event)" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
+        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
             <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
           </svg>
         </button>
         <div class="text-[#eee] text-center mt-[-20px] font-bold">LW</div>
       </div>
       <!-- ST -->
-      <div class="player_card relative text-black lg:w-[16%] lg:scale-[0.7] translate-y-[-1250%] left-[42%]">
+      <div data-position="ST" class="player_card relative text-black lg:w-[16%] lg:scale-[0.7] translate-y-[-1250%] left-[42%]">
         <img src="src/assets/img/badge_gold.webp" alt="">
-        <button class=" absolute top-1/2 left-[34%]">
-          <svg onclick="choosePlayerModal(event)" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
+        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
             <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
           </svg>
         </button>
         <div class="text-[#eee] text-center mt-[-20px] font-bold">ST</div>
       </div>
       <!-- RW -->
-      <div class="player_card relative text-black lg:w-[16%] lg:scale-[0.7] translate-y-[-1350%] left-[70%]">
+      <div data-position="RW" class="player_card relative text-black lg:w-[16%] lg:scale-[0.7] translate-y-[-1350%] left-[70%]">
         <img src="src/assets/img/badge_gold.webp" alt="">
-        <button class=" absolute top-1/2 left-[34%]">
-          <svg onclick="choosePlayerModal(event)" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
+        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
             <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
           </svg>
         </button>
@@ -182,7 +185,7 @@
     </div>
     
     <!-- substitutes container -->
-    <div class="bg-[#2a4b3b] m-auto w-11/12 lg:w-1/3 md:w-1/3 p-5  text-[#eee] flex flex-col items-center">
+    <div class="border-2 border-[#2a4b3b] rounded-md m-auto w-11/12 lg:w-1/3 md:w-1/3 p-5  text-[#eee] flex flex-col items-center">
       <h1>Substitutes</h1>
        <div class="cards grid grid-cols-3">
         <!-- card1 -->
@@ -251,14 +254,92 @@
       <div id="players_container" class="flex flex-col gap-y-4">
          
       </div>
-      <!-- add player button -->
-      <div class="mb-2 mt-4 flex justify-end">
-        <button class="w-1/5 p-2 bg-neutral-700 text-white rounded-lg focus:outline-none">Add PLayer</button>
+    </div>
+  </div>
+
+  <!-- add player Modal -->
+  <div id="add_player_modal" class="fixed inset-0 bg-neutral-800 bg-opacity-50 flex items-center justify-center hidden">
+    <div id="modal_content" class="w-1/2 overflow-y-auto scrollbar-hidden mx-auto mt-10 p-4 bg-neutral-800 rounded-lg shadow-lg">
+      <div id="close_add_player_modal" class="flex justify-end items-center mb-4">
+        <i class="fas fa-times text-gray-400 cursor-pointer text-xl"></i>
       </div>
+      <form id="add_player_form" class="text-white flex flex-col gap-y-10">
+        <!-- name and photo -->
+        <div class="flex justify-between items-end">
+          <div class="flex flex-col w-2/3">
+            <label for="player_name" class="mb-5">Player's Full Name</label>
+            <input id="player_name" type="text" placeholder="Enter Full Name" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <!-- photo -->
+          <div class="w-1/3 flex flex-col items-center">
+            <label for="playerPhotoInput" class="text-white rounded-lg cursor-pointer">Choose Photo</label>
+            <input type="file" id="playerPhotoInput" accept="image/*" class="hidden" />
+            <img id="playerPhotoPreview" class="mt-4 w-16" src="src/assets/img/user.png" alt="Player Photo Preview" />
+          </div>
+        </div>
+        <!-- nationality -->
+        <div>
+          <h1>Nationality</h1>
+          <select id="nationality_select" class="p-2 bg-neutral-700 rounded-lg focus:outline-none w-2/3">
+            <option value="">---</option>
+          </select>
+        </div>
+        <!-- club -->
+        <div>
+          <h1>Club</h1>
+          <select id="club_select" class="p-2 bg-neutral-700 rounded-lg focus:outline-none w-2/3"></select>
+        </div>
+        <!-- statistics -->
+        <div class="statistics grid grid-cols-3 gap-x-16">
+          <div class="flex flex-col">
+            <label for="pace">Pace:</label>
+            <input id="pace" type="number" min="0" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="flex flex-col">
+            <label for="shooting">Shooting:</label>
+            <input id="shooting" type="number" min="0" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="flex flex-col">
+            <label for="passing">Passing:</label>
+            <input id="passing" type="number" min="0" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="flex flex-col">
+            <label for="dribbling">Dribbling:</label>
+            <input id="dribbling" type="number" min="0" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="flex flex-col">
+            <label for="defending">Defending:</label>
+            <input id="defending" type="number" min="0" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="flex flex-col">
+            <label for="physical">Physical:</label>
+            <input id="physical" type="number" min="0" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+        </div>
+        <!-- submit button -->
+        <button id="save_player_btn" type="button" class="border-2 border-[#2a4b3b] rounded-lg w-1/4 py-2 self-end hover:bg-[#2a4b3b]">Save</button>
+      </form>      
     </div>
   </div>
 
   <!-- scripts -->
    <script src="js/script.js"></script>
+
+   <script>
+    // Handle image preview
+    document.getElementById("playerPhotoInput").addEventListener("change", function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const imgElement = document.getElementById("playerPhotoPreview");
+          imgElement.src = e.target.result;
+          imgElement.classList.remove("hidden"); // Show image preview
+        };
+        reader.readAsDataURL(file); // Read the file as a data URL
+      }
+    });
+  </script>
+  
 </body>
 </html>
