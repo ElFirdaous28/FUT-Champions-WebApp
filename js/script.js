@@ -62,14 +62,13 @@ function choosePlayerModal(e){
     choosePlayerModal.classList.remove("hidden");
     const PlayerPosition = e.target.closest("button").parentElement.getAttribute("data-position");
     playersContainer.innerHTML="";
-
     players.forEach(player => {
         if(player.position.includes(PlayerPosition)){            
             const positions = player.position.join(' / ');            
             playersContainer.innerHTML+=`<div class="flex items-center justify-between p-2 bg-neutral-700 rounded-lg">
                                                 <div class="flex items-center">
                                                     <!-- Player Image -->
-                                                    <img alt="Image of Messi" class="w-16 h-16 rounded-full" height="40" src="${player.photo || 'https://via.placeholder.com/150?text=No+Image'}" width="40"/>
+                                                    <img alt="Image of player" class="w-16 h-16 rounded-full" height="40" src="${player.photo || 'https://via.placeholder.com/150?text=No+Image'}" width="40"/>
 
                                                     <!-- Player Info -->
                                                     <div class="ml-4">
