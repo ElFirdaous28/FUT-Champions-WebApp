@@ -31,13 +31,12 @@ function SaveSquad() {
         principalePlayers: [],
         substitutes: []
     };
-
-    // Check if a squad with the same subtitle already exists
+    // check if subtitle does not existe
     const existingSquad = squads.find(squad => squad.subtitle === newSquad.subtitle);
     
     if (existingSquad) {
         alert("A squad with this subtitle already exists!");
-        return; // Prevent saving the squad if subtitle is not unique
+        return;// return to not save
     }
 
     squads.push(newSquad);
