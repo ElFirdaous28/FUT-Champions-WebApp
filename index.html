@@ -56,10 +56,10 @@
       </div>
       <!-- formation 4,3,3 by default -->
       <!-- gk -->
-      <div id="GK" data-position="GK" class="player_card group relative text-black w-[32%] lg:w-[16%] scale-[0.3] lg:scale-[0.7]  translate-y-[-40%] left-[36%] lg:left-[42%]">
+      <div id="GK" data-position="GK" data-player-id="player-1" class="player_card group relative text-black w-[32%] lg:w-[16%] scale-[0.3] lg:scale-[0.7]  translate-y-[-40%] left-[36%] lg:left-[42%]">
         <div class="text-[#eee] translate-y-5 flex justify-around invisible group-hover:visible">
           <i class="fas fa-plus cursor-pointer" onclick="choosePlayerModal(event)" title="add substitute at position"></i>
-          <i class="fas fa-exchange-alt cursor-pointer" title="make substitute"></i>
+          <i onclick="changePlayerRole(event)" class="fas fa-exchange-alt cursor-pointer" title="make substitute"></i>
           <i onclick="removeFromSquad(event)" class="fas fa-times cursor-pointer" title="remove from squad"></i>
         </div>
         <img src="src/assets/img/badge_gold.webp" alt="">

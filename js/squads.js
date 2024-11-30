@@ -53,7 +53,7 @@ function SaveSquad() {
                     RW: ""
                 },
                 substitutesPlayers: {
-                    GK: ["player-1","player-10"],
+                    GK: [],
                     LB: [],
                     CB1: [],
                     CB2: [],
@@ -165,13 +165,42 @@ function removeFromSquad(e){
         for (let position in substitutesPlayers) {
             const playerIndex = substitutesPlayers[position].indexOf(playerId);
             if (playerIndex !== -1) {
-                substitutesPlayers[position].splice(playerIndex, 1); // Remove player from position
+                substitutesPlayers[position].splice(playerIndex, 1);
                 console.log(`Player removed from substitutes at ${position}`);
             }
         }
         showPlayers();
         localStorage.setItem("squads", JSON.stringify(squads));       
     }   
+}
+
+// 
+function changePlayerRole(e) {
+    const subtitleInput = document.getElementById("squad_subtitle");
+    
+    if (inputNotEmpty(subtitleInput, "Subtitle field is required")){
+        const currentSquadIndex = squads.findIndex(sq => sq.subtitle === subtitleInput.value);
+        const playerId = e.target.parentElement.parentElement.getAttribute("data-player-id");
+        const playerPosition = e.target.parentElement.parentElement.id;
+        console.log(playerId,playerPosition);
+        console.log(squads[currentSquadIndex].principalePlayers[playerPosition]);
+        
+        if (squads[currentSquadIndex].principalePlayers[playerPosition]===playerId) {
+            // remove from principale
+            squads[currentSquadIndex].principalePlayers[playerPosition] = "";
+            // Add  to substitutes
+            if (!squads[currentSquadIndex].substitutesPlayers[playerPosition].includes(playerId)) {
+                squads[currentSquadIndex].substitutesPlayers[playerPosition].push(playerId);
+                console.log(e.target.parentElement);
+                
+            }
+            console.log(`Moved player ${playerId} from ${playerPosition} in principale to substitutes`);
+
+            // Save updated squads back to localStorage (optional)
+            localStorage.setItem("squads", JSON.stringify(squads));
+        }
+        
+    }
 }
 
 function showPlayers(){
