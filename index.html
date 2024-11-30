@@ -16,7 +16,7 @@
   <header class="bg-[#2a4b3b] h-20 flex items-center justify-end p-10">
     <button onclick="showAddPlayerModel()" class="p-2 text-[#eee] border-2 rounded-lg focus:outline-none hover:bg-[#191919]">Add Player</button>
   </header>
-  <form class="text-[#eee] py-10 flex justify-around">
+  <div class="text-[#eee] py-10 flex flex-col lg:flex-row md:flex-row justify-around">
     <div>
       <label for="formation_select" class="font-semibold mr-2">Formation</label>
       <select onchange="changeFormation(event)" class="bg-[#191919] border-2 border-[#2a4b3b] w-56 py-2 pl-5 rounded-lg focus:outline-none" name="" id="formation_select">
@@ -37,8 +37,9 @@
     <div>
       <button onclick="SaveSquad()" class="border-2 border-[#2a4b3b] py-2 px-3 rounded-lg hover:bg-[#2a4b3b]">Save squad</button>
     </div>
-  </form>
+  </div>
     <!--  -->
+  <!-- items is the reason!!! -->
   <div class="flex flex-col gap-y-20  lg:flex-row md:flex-row items-center justify-start ">
     <!-- campo container -->
     <div class="campo_container relative pt-20 lg:pt-32 md-pt-40 w-full lg:w-7/12 md:w-4/5" style="max-height: 1000px;">
@@ -58,7 +59,7 @@
       <div id="GK_cart" data-position="GK" class="player_card group relative text-black w-[32%] lg:w-[16%] scale-[0.3] lg:scale-[0.7]  translate-y-[-40%] left-[36%] lg:left-[42%]">
         <div class="text-[#eee] translate-y-5 flex justify-around invisible group-hover:visible">
           <i class="fas fa-times cursor-pointer" title="remove from squad"></i>
-          <i class="fas fa-plus cursor-pointer" title="add at position"></i>
+          <i class="fas fa-plus cursor-pointer" onclick="choosePlayerModal(event)" title="add substitute at position"></i>
           <i class="fas fa-exchange-alt cursor-pointer" title="make substitute"></i>
         </div>
         <img src="src/assets/img/badge_gold.webp" alt="">
@@ -212,12 +213,16 @@
       </div>
     </div>
     
-    <!-- substitutes container -->
-    <div class="border-2 border-[#2a4b3b] rounded-md m-auto w-11/12 lg:w-1/3 md:w-1/3 p-5  text-[#eee] flex flex-col items-center">
-      <h1>Substitutes</h1>
-       <div class="cards grid grid-cols-3">
-        <!-- card1 -->
-        <div class="player_card relative text-black ">
+    <!-- players container -->
+    <div class="border-2 border-[#2a4b3b] rounded-md m-auto w-11/12 lg:w-[30%] md:w-1/3  text-[#eee] flex flex-col items-center">
+      <select id="players_container_select" onchange="showPlayers()" name="" id="" class="bg-[#191919] border-2 border-[#2a4b3b] w-56 py-2 pl-5 rounded-lg focus:outline-none my-4">
+        <option value=""></option>
+        <option value="all_players">All Players</option>
+        <option value="squad_substitutes">Squad Substitutes</option>
+      </select>
+       <div id="aside_players_container" class="cards grid grid-cols-3 max-h-screen overflow-y-auto scrollbar-hidden">
+        <!-- players cards will appear here -->
+        <div  class="player_card relative text-black ">
           <img src="src/assets/img/badge_gold.webp" alt="">
           <!-- position and number -->
           <div class="player_positoin flex flex-col absolute top-[25%] left-[15%]">
@@ -230,7 +235,7 @@
           </div>
           <!-- name and more -->
           <div class="w-4/5 flex flex-col items-center absolute top-[62%] left-[10%]">
-            <p class="text-xs lg:text-xs md:text-xs font-bold">Messi</p>
+            <p class="text-xs font-bold">Messi Messi</p>
             <!-- player statistics -->
             <div class="palyer_statistics w-full flex flex-row justify-around text-[6px] lg:text-[0.5em] md:text-[0.5em]">
               <div class="flex flex-col items-center">
