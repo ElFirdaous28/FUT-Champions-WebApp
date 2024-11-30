@@ -1,26 +1,29 @@
 let localStoragePlayers = JSON.parse(localStorage.getItem("players")) || [];
 let squads = JSON.parse(localStorage.getItem("squads")) || [];
+let clickedPosition;
 
 function changeFormation(e){
     const formation = e.target.value;
     if(formation==="442"){
-        document.getElementById("CM1_cart").classList.replace("translate-y-[-710%]", "translate-y-[-730%]");
-        document.getElementById("CM2_cart").classList.replace("translate-y-[-810%]", "translate-y-[-830%]");
-        document.getElementById("LW_cart").classList.replace("translate-y-[-1150%]", "translate-y-[-1030%]");
-        document.getElementById("LW_cart").querySelector(".position_abr").textContent="LM";
-        document.getElementById("LW_cart").setAttribute("data-position","LM");
+        document.getElementById("CM1").classList.replace("translate-y-[-710%]", "translate-y-[-730%]");
+        document.getElementById("CM2").classList.replace("translate-y-[-810%]", "translate-y-[-830%]");
+        document.getElementById("LW").classList.replace("translate-y-[-1150%]", "translate-y-[-1030%]");
+        document.getElementById("LW").querySelector(".position_abr").textContent="LM";
+        document.getElementById("LW").setAttribute("data-position","LM");
 
-        document.getElementById("RW_cart").classList.replace("translate-y-[-1350%]", "translate-y-[-1230%]");
-        document.getElementById("RW_cart").querySelector(".position_abr").textContent="RM";
-        document.getElementById("RW_cart").setAttribute("data-position","RM");
+        document.getElementById("RW").classList.replace("translate-y-[-1350%]", "translate-y-[-1230%]");
+        document.getElementById("RW").querySelector(".position_abr").textContent="RM";
+        document.getElementById("RW").setAttribute("data-position","RM");
 
-        document.getElementById("CM3_cart").classList.replace("translate-y-[-970%]", "translate-y-[-1050%]");
-        document.getElementById("CM3_cart").classList.replace("left-[42%]", "left-[50%]");
-        document.getElementById("CM3_cart").querySelector(".position_abr").textContent="ST";
-        document.getElementById("CM3_cart").querySelector(".position_abr").id="ST2_cart";
-        document.getElementById("CM3_cart").setAttribute("data-position","RM");
+        document.getElementById("CM3").classList.replace("translate-y-[-970%]", "translate-y-[-1050%]");
+        document.getElementById("CM3").classList.replace("left-[42%]", "left-[50%]");
+        document.getElementById("CM3").querySelector(".position_abr").textContent="ST";
+        document.getElementById("CM3").querySelector(".position_abr").id="ST2";
+        document.getElementById("CM3").setAttribute("data-position","RM");
 
-        document.getElementById("ST1_cart").classList.replace("left-[42%]", "left-[32%]");
+        document.getElementById("ST").classList.replace("left-[42%]", "left-[32%]");
+        document.getElementById("ST").querySelector(".position_abr").id="ST1";
+
     }
 }
 function SaveSquad() {
@@ -30,13 +33,73 @@ function SaveSquad() {
     if(inputNotEmpty(titleInput,"Title field is requierd")&&inputNotEmpty(subtitleInput,"Subtitle field is requierd")){
         title=titleInput.value;
         subtitle=subtitleInput.value;
-        const newSquad = {
-            formation,
-            title,
-            subtitle,
-            principalePlayers: [{position:"RW",id:"player-1"}],
-            substitutes: [{position:"RW",id:"player-1"}]
-        };
+        let newSquad;
+        if(formation==="433"){
+            newSquad = {
+                formation,
+                title,
+                subtitle,
+                principalePlayers: {
+                    GK: "",
+                    LB: "",
+                    CB1: "",
+                    CB2: "",
+                    RB: "",
+                    CM1: "",
+                    CM2: "",
+                    CM3: "",
+                    LW: "",
+                    ST: "",
+                    RW: ""
+                },
+                substitutesPlayers: {
+                    GK: ["player-1","player-10"],
+                    LB: [],
+                    CB1: [],
+                    CB2: [],
+                    RB: [],
+                    CM1: [],
+                    CM2: [],
+                    CM3: [],
+                    LW: [],
+                    ST: [],
+                    RW: []
+                }
+            };
+        }
+        else if(formation==="442"){
+            newSquad = {
+                formation,
+                title,
+                subtitle,
+                principalePlayers: {
+                    GK: [],
+                    LB: [],
+                    CB1: [],
+                    CB2: [],
+                    RB: [],
+                    LM: [],
+                    CM1: [],
+                    CM2: [],
+                    RM: [],
+                    ST1: [],
+                    ST2: []
+                },
+                substitutesPlayers: {
+                    GK: [],
+                    LB: [],
+                    CB1: [],
+                    CB2: [],
+                    RB: [],
+                    LM: [],
+                    CM1: [],
+                    CM2: [],
+                    RM: [],
+                    ST1: [],
+                    ST2: []
+                }
+            };
+        }
         // check if subtitle does not existe
         const existingSquad = squads.find(squad => squad.subtitle === newSquad.subtitle);    
         if (existingSquad) {
@@ -53,20 +116,29 @@ function SaveSquad() {
 function addPlayerToSquad(e){    
     const choosePlayerModal = document.getElementById("choose_player_modal");
     const subtitleInput = document.getElementById("squad_subtitle");
-    const clickedPlayerId=e.target.closest(".player_item").getAttribute('data-player-id');
-    const clickedPlayerPosition=e.target.closest(".player_item").getAttribute('data-player-position');
     
     if(inputNotEmpty(subtitleInput,"Subtitle field is requierd")){
-        console.log(squads);
-        const currentSauqdIndex = squads.findIndex(sq=>sq.subtitle===subtitleInput.value);
-        console.log(squads[currentSauqdIndex]);
+        const currentSquadIndex = squads.findIndex(sq=>sq.subtitle===subtitleInput.value);
         
-        if(!squads[currentSauqdIndex].principalePlayers.find(player=>player.id===clickedPlayerId)){
-            squads[currentSauqdIndex].principalePlayers.push({position:clickedPlayerPosition,id:clickedPlayerId});
+        // add to priciple        
+        if(e.target.closest(".player_item").parentElement.id==="add_to_principale"){
+            const clickedPlayerId=e.target.closest(".player_item").getAttribute('data-player-id'); 
+            squads[currentSquadIndex].principalePlayers[clickedPosition]=clickedPlayerId;                
             localStorage.setItem("squads", JSON.stringify(squads));
         }
-        else{
-            alert("player alredy in squad");
+        // add to substitues
+        if(e.target.closest(".player_item").parentElement.id==="add_to_substitues"){
+            const clickedPlayerId=e.target.closest(".player_item").getAttribute('data-player-id');
+            console.log(clickedPosition); 
+            if(!squads[currentSquadIndex].substitutesPlayers[clickedPosition].find(id=>id===clickedPlayerId)&& !Object.values(squads[currentSquadIndex].principalePlayers).includes(clickedPlayerId)){
+                // !Object.valuestake object and return array of values
+                squads[currentSquadIndex].substitutesPlayers[clickedPosition].push(clickedPlayerId);
+                localStorage.setItem("squads", JSON.stringify(squads));
+            }  
+            else{
+                console.log("player alredy in ");
+                
+            }         
         }
     }
     else{
@@ -224,7 +296,10 @@ function choosePlayerModal(e){
         const choosePlayerModal=document.getElementById("choose_player_modal");
         const playersContainer = document.getElementById("players_container");
         choosePlayerModal.classList.remove("hidden");
-        let PlayerPosition = e.target.closest("button").parentElement.getAttribute("data-position");
+        clickedPosition=e.target.closest(".player_card").id;        
+
+        let PlayerPosition = e.target.tagName === "I" ? e.target.parentElement.parentElement.getAttribute("data-position") : e.target.closest("button").parentElement.getAttribute("data-position");
+        playersContainer.id= e.target.tagName === "I" ? "add_to_substitues" : "add_to_principale";
         playersContainer.innerHTML="";
         players.forEach(player => {
             if(player.position.includes(PlayerPosition)){            
