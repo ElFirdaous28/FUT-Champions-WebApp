@@ -42,7 +42,7 @@
   <!-- items is the reason!!! -->
   <div class="flex flex-col gap-y-20  lg:flex-row md:flex-row items-center justify-start ">
     <!-- campo container -->
-    <div class="campo_container relative pt-20 lg:pt-32 md-pt-40 w-full lg:w-7/12 md:w-4/5" style="max-height: 1000px;">
+    <div class="campo_container relative pt-20 lg:pt-32 md:pt-40 w-full lg:w-7/12 md:w-4/5" style="max-height: 1000px;">
       <div class="campo h-full"  >
         <div class="corner">
           <div class="corner1"></div>
@@ -58,9 +58,9 @@
       <!-- gk -->
       <div id="GK" data-position="GK" class="player_card group relative text-black w-[32%] lg:w-[16%] scale-[0.3] lg:scale-[0.7]  translate-y-[-40%] left-[36%] lg:left-[42%]">
         <div class="text-[#eee] translate-y-5 flex justify-around invisible group-hover:visible">
-          <i class="fas fa-times cursor-pointer" title="remove from squad"></i>
           <i class="fas fa-plus cursor-pointer" onclick="choosePlayerModal(event)" title="add substitute at position"></i>
           <i class="fas fa-exchange-alt cursor-pointer" title="make substitute"></i>
+          <i onclick="removeFromSquad(event)" class="fas fa-times cursor-pointer" title="remove from squad"></i>
         </div>
         <img src="src/assets/img/badge_gold.webp" alt="">
         <!-- position and number -->
@@ -214,63 +214,13 @@
     </div>
     
     <!-- players container -->
-    <div class="border-2 border-[#2a4b3b] rounded-md m-auto w-11/12 lg:w-[30%] md:w-1/3  text-[#eee] flex flex-col items-center">
+    <div class="border-2 border-[#2a4b3b] rounded-md m-auto w-11/12 lg:w-1/3 md:w-1/3 text-[#eee] flex flex-col items-center">
       <select id="players_container_select" onchange="showPlayers()" name="" id="" class="bg-[#191919] border-2 border-[#2a4b3b] w-56 py-2 pl-5 rounded-lg focus:outline-none my-4">
-        <option value=""></option>
         <option value="all_players">All Players</option>
         <option value="squad_substitutes">Squad Substitutes</option>
       </select>
-       <div id="aside_players_container" class="cards grid grid-cols-3 max-h-screen overflow-y-auto scrollbar-hidden">
+       <div id="aside_players_container" class="cards grid grid-cols-3 gap-4 max-h-screen overflow-y-auto scrollbar-hidden">
         <!-- players cards will appear here -->
-        <div  class="player_card relative text-black ">
-          <img src="src/assets/img/badge_gold.webp" alt="">
-          <!-- position and number -->
-          <div class="player_positoin flex flex-col absolute top-[25%] left-[15%]">
-            <p class="text-[10px] lg:text-sm font-bold">90</p>
-            <p class="text-xs lg:text-xs">CF</p> 
-          </div>
-          <!-- image -->
-          <div class="player_image w-2/3 absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <img src="https://cdn.sofifa.net/players/158/023/25_120.png" alt="">
-          </div>
-          <!-- name and more -->
-          <div class="w-4/5 flex flex-col items-center absolute top-[62%] left-[10%]">
-            <p class="text-xs font-bold">Messi Messi</p>
-            <!-- player statistics -->
-            <div class="palyer_statistics w-full flex flex-row justify-around text-[6px] lg:text-[0.5em] md:text-[0.5em]">
-              <div class="flex flex-col items-center">
-                <p class="font-semibold">PAC</p>
-                <p class="font-extrabold">80</p> 
-              </div>
-              <div class="flex flex-col items-center">
-                <p class="font-semibold">SHO</p>
-                <p class="font-extrabold">87</p> 
-              </div>
-              <div class="flex flex-col items-center">
-                <p class="font-semibold">PAS</p>
-                <p class="font-extrabold">90</p> 
-              </div>
-              <div class="flex flex-col items-center">
-                <p class="font-semibold">DRI</p>
-                <p class="font-extrabold">94</p> 
-              </div>
-              <div class="flex flex-col items-center">
-                <p class="font-semibold">DEF</p>
-                <p class="font-extrabold">33</p> 
-              </div>
-              <div class="flex flex-col items-center">
-                <p class="font-semibold">PHY</p>
-                <p class="font-extrabold">64</p> 
-              </div>
-            </div>
-            <!-- flags -->
-            <div class="palyer_statistics w-full flex flex-row justify-center gap-2">
-              <img src="https://cdn.sofifa.net/flags/pt.png" width="10%" alt="">
-              <img src="https://cdn.sofifa.net/meta/team/271/30.png" width="10%" alt="">
-              <img src="https://cdn.sofifa.net/meta/team/2506/120.png" width="10%" alt="">
-            </div>
-          </div>
-        </div>
        </div>
     </div>
   </div>
