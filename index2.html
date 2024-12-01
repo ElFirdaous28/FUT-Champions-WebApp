@@ -12,14 +12,15 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
     </head>
 <body class="bg-[#191919]">
-    <header class="bg-[#2a4b3b] h-20 flex items-center justify-end p-10">
-        <button onclick="showAddPlayerModel()" class="p-2 text-[#eee] border-2 rounded-lg focus:outline-none hover:bg-[#191919]">Add Player</button>
-    </header>/
+    <header class="h-20 flex items-center justify-end p-10">
+        <button onclick="showAddPlayerModel()" class="px-3 py-2 bg-[#2a4b3b] text-[#eee] border-2 rounded-lg focus:outline-none hover:bg-[#191919] hover:border-[#2a4b3b]">Add Player</button>
+    </header>
     <!--  -->
+    <h1 class="text-[#eee] ml-[4%]">Create nwe squad or modify an old one by writting its subtitle</h1>
     <div class="text-[#eee] py-10 flex flex-col lg:flex-row md:flex-row items-center md:items-start gap-y-10 lg:justify-around md:justify-around">
         <div class="w-11/12 lg:w-1/5 md:w-1/5 flex md:flex-col md:items-start items-center">
           <label for="formation_select" class="w-1/4 font-semibold mr-2">Formation</label>
-          <select class="w-full bg-[#191919] border-2 border-[#2a4b3b] py-2 pl-5 rounded-lg focus:outline-none" name="" id="formation_select">
+          <select onchange="changeFormation(event)" class="w-full bg-[#191919] border-2 border-[#2a4b3b] py-2 pl-5 rounded-lg focus:outline-none" name="" id="formation_select">
             <option class=" hover:bg-[#191919]" value="4-3-3">4-3-3</option>
             <option value="4-4-2">4-4-2</option>
           </select>
@@ -31,7 +32,7 @@
     
         <div class="w-11/12 lg:w-1/5 md:w-1/5 flex md:flex-col md:items-start items-center">
           <label for="squad_subtitle" class="w-1/4 font-semibold mr-2">Subtitle</label>
-          <input class="w-full bg-[#191919] border-2 border-[#2a4b3b] py-2 pl-5 rounded-lg placeholder-gray-500" required type="text" name="" id="squad_subtitle" placeholder="Subtitle of squad">
+          <input onchange="showPlayersOnCampo()" class="w-full bg-[#191919] border-2 border-[#2a4b3b] py-2 pl-5 rounded-lg placeholder-gray-500" required type="text" name="" id="squad_subtitle" placeholder="Subtitle of squad">
         </div>
     
         <div>
@@ -54,79 +55,7 @@
 
                 <!-- carts -->
                 <div id="campo_carts" class="absolute inset-0 w-full h-full z-10 -rotate-90">
-                    <div id="RW" data-position="RW"  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%]">
-                        <img src="src/assets/img/badge_gold.webp" alt="">
-                        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
-                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
-                                <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
-                            </svg>
-                        </button>
-                    <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">RW</div>
-                    </div>
-                    <div id="LB" data-position="LB" class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%]">
-                        <img src="src/assets/img/badge_gold.webp" alt="">
-                        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
-                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
-                                <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
-                            </svg>
-                        </button>
-                    <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">LB</div>
-                    </div>
-                    <div id="CB1" data-position="CB"  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%]">
-                        <img src="src/assets/img/badge_gold.webp" alt="">
-                        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
-                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
-                                <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
-                            </svg>
-                        </button>
-                    <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">CB</div>
-                    </div>
-                    <div id="CB2" data-position="CB"  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%]">
-                        <img src="src/assets/img/badge_gold.webp" alt="">
-                        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
-                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
-                                <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
-                            </svg>
-                        </button>
-                    <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">CB</div>
-                    </div>
-                    <div id="RB" data-position="RB"  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%]">
-                        <img src="src/assets/img/badge_gold.webp" alt="">
-                        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
-                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
-                                <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
-                            </svg>
-                        </button>
-                    <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">RB</div>
-                    </div>
-                    <div id="CM1" data-position="CM"  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%]">
-                        <img src="src/assets/img/badge_gold.webp" alt="">
-                        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
-                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
-                                <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
-                            </svg>
-                        </button>
-                    <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">CM</div>
-                    </div>
-                    <div id="CM2" data-position="CM"  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%]">
-                        <img src="src/assets/img/badge_gold.webp" alt="">
-                        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
-                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
-                                <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
-                            </svg>
-                        </button>
-                    <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">CM</div>
-                    </div>
-                    <div id="CM3" data-position="CM"  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%]">
-                        <img src="src/assets/img/badge_gold.webp" alt="">
-                        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
-                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
-                                <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
-                            </svg>
-                        </button>
-                    <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">CM</div>
-                    </div>
-                    <div id="LW" data-position="LW"  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%]">
+                    <div id="LW" data-position="LW" data-player-id=""  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%] group">
                         <img src="src/assets/img/badge_gold.webp" alt="">
                         <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
@@ -135,7 +64,7 @@
                         </button>
                     <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">LW</div>
                     </div>
-                    <div id="ST" data-position="ST"  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%]">
+                    <div id="ST" data-position="ST" data-player-id="" class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%] group">
                         <img src="src/assets/img/badge_gold.webp" alt="">
                         <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
@@ -144,14 +73,86 @@
                         </button>
                     <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">ST</div>
                     </div>
-                    <div id="GK" data-position="GK"  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%]">
+                    <div id="RW" data-position="RW" data-player-id=""  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%] group">
+                        <img src="src/assets/img/badge_gold.webp" alt="">
+                        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
+                                <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" RWyle="fill: #333333;"></path>
+                            </svg>
+                        </button>
+                    <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">ST</div>
+                    </div>
+                    <div id="CM1" data-position="CM" data-player-id=""  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%] group">
                         <img src="src/assets/img/badge_gold.webp" alt="">
                         <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
                                 <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
                             </svg>
                         </button>
-                    <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">GK</div>
+                    <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">CM</div>
+                    </div>
+                    <div id="CM3" data-position="CM" data-player-id=""  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%] group">
+                        <img src="src/assets/img/badge_gold.webp" alt="">
+                        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
+                                <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
+                            </svg>
+                        </button>
+                    <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">CM</div>
+                    </div>
+                    <div id="CM2" data-position="CM" data-player-id=""  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%] group">
+                        <img src="src/assets/img/badge_gold.webp" alt="">
+                        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
+                                <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
+                            </svg>
+                        </button>
+                    <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">CM</div>
+                    </div>
+                    <div id="LB" data-position="LB" data-player-id=""  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%] group">
+                        <img src="src/assets/img/badge_gold.webp" alt="">
+                        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
+                                <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
+                            </svg>
+                        </button>
+                    <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">LB</div>
+                    </div>
+                    <div id="CB1" data-position="CB" data-player-id=""  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%] group">
+                        <img src="src/assets/img/badge_gold.webp" alt="">
+                        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
+                                <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
+                            </svg>
+                        </button>
+                    <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">CB</div>
+                    </div>
+                    <div id="CB2" data-position="CB" data-player-id=""  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%] group">
+                        <img src="src/assets/img/badge_gold.webp" alt="">
+                        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
+                                <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
+                            </svg>
+                        </button>
+                    <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">CB</div>
+                    </div>
+                    <div id="RB" data-position="RB" data-player-id=""  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%] group">
+                        <img src="src/assets/img/badge_gold.webp" alt="">
+                        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
+                                <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
+                            </svg>
+                        </button>
+                    <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">RB</div>
+                    </div>
+                    <div id="GK" data-position="GK" data-player-id=""  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%] group group">
+                        <img src="src/assets/img/badge_gold.webp" alt="">
+                        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
+                                <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
+                            </svg>
+                        </button>
+                        <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">GK</div>
                     </div>
                 </div>
             </div>

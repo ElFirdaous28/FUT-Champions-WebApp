@@ -11,10 +11,10 @@ const formations = [
             { pos: "st", x: 65, y: 15 },
           ],
           midfield: [
-            { pos: "cm", x: 22, y: 40 },
-            { pos: "cm", x: 35, y: 50 },
-            { pos: "cm", x: 65, y: 50 },
-            { pos: "cm", x: 78, y: 40 },
+            { pos: "cm", x: 22, y: 45 },
+            { pos: "cm", x: 35, y: 60 },
+            { pos: "cm", x: 65, y: 60 },
+            { pos: "cm", x: 78, y: 45 },
           ],
           defense: [
             { pos: "cb", x: 22, y: 80 },
@@ -54,9 +54,7 @@ const formations = [
   ];
   
   function repositionCards(formation) {
-    console.log(formation);
     const choosedFormation =formations.find(f=>f.formation===formation);
-    console.log(choosedFormation);
     
     
     const cards = document.querySelectorAll(".cart");

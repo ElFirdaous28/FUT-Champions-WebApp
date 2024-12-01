@@ -2,22 +2,36 @@ let localStoragePlayers = JSON.parse(localStorage.getItem("players")) || [];
 let squads = JSON.parse(localStorage.getItem("squads")) || [];
 let clickedPosition;
 
-function changeFormation(e){
+function changeFormation(e) {
     const formation = e.target.value;
-    if(formation==="442"){
-        document.getElementById("LW").querySelector(".position_abr").textContent="LM";
-        document.getElementById("LW").setAttribute("data-position","LM");
 
-        document.getElementById("RW").querySelector(".position_abr").textContent="RM";
-        document.getElementById("RW").setAttribute("data-position","RM");
+    // Define mappings for each formation
+    const formations = {
+        "4-4-2": [
+            { oldId: "RW", newId: "LM", newPosition: "LM" },
+            { oldId: "CM2", newId: "RM", newPosition: "RM" },
+            { oldId: "LW", newId: "ST", newPosition: "ST" },
+        ],
+        "4-3-3": [
+            { oldId: "LM", newId: "RW", newPosition: "RW" },
+            { oldId: "RM", newId: "CM2", newPosition: "CM2" },
+            { oldId: "ST", newId: "LW", newPosition: "LW" },
+        ],
+    };
 
-        
-        document.getElementById("CM3").querySelector(".position_abr").textContent="ST";
-        document.getElementById("CM3").querySelector(".position_abr").id="ST2";
-        document.getElementById("CM3").setAttribute("data-position","RM");
-        document.getElementById("ST").querySelector(".position_abr").id="ST1";
+    // Apply the transformation if the formation is defined
+    if (formations[formation]) {
+        formations[formation].forEach(({ oldId, newId, newPosition }) => {
+            const element = document.getElementById(oldId);
+            if (element) {
+                element.querySelector(".position_abr").textContent = newPosition;
+                element.setAttribute("data-position", newPosition);
+                element.id = newId;
+            }
+        });
     }
 }
+
 function SaveSquad() {
     const formation= document.getElementById("formation_select").value;
     const titleInput= document.getElementById("squad_title");
@@ -26,7 +40,7 @@ function SaveSquad() {
         title=titleInput.value;
         subtitle=subtitleInput.value;
         let newSquad;
-        if(formation==="433"){
+        if(formation==="4-3-3"){
             newSquad = {
                 formation,
                 title,
@@ -59,7 +73,7 @@ function SaveSquad() {
                 }
             };
         }
-        else if(formation==="442"){
+        else if(formation==="4-4-2"){
             newSquad = {
                 formation,
                 title,
@@ -143,8 +157,8 @@ function removeFromSquad(e){
     const subtitleInput = document.getElementById("squad_subtitle");
     if(inputNotEmpty(subtitleInput,"Subtitle field is requierd")){
         const currentSquadIndex = squads.findIndex(sq=>sq.subtitle===subtitleInput.value);
-        const playerId = e.target.getAttribute("data-player-id");
-        console.log(playerId);
+        const playerId = e.target.parentElement.parentElement.getAttribute("data-player-id");
+        
         // Remove from principalePlayers if player exists
         const principalePlayers = squads[currentSquadIndex].principalePlayers;
         for (let position in principalePlayers) {
@@ -175,6 +189,8 @@ function changePlayerRole(e) {
         const currentSquadIndex = squads.findIndex(sq => sq.subtitle === subtitleInput.value);
         const playerId = e.target.parentElement.parentElement.getAttribute("data-player-id");
         const playerPosition = e.target.parentElement.parentElement.id;
+        console.log(e.target.parentElement.parentElement);
+        
         console.log(playerId,playerPosition);
         console.log(squads[currentSquadIndex].principalePlayers[playerPosition]);
         
@@ -364,3 +380,144 @@ document.getElementById("choose_player_modal").addEventListener("click", (e) => 
         closeModal("choose_player_modal");
     }
 });
+
+function showPlayersOnCampo() {
+    const playerCart = document.querySelectorAll(".cart");
+    const squadSubtitle = document.getElementById("squad_subtitle").value;
+    if(squadSubtitle!==""){
+        const currentSquadIndex=squads.findIndex(sq=>sq.subtitle===squadSubtitle);
+        
+       if(currentSquadIndex!==-1){
+        // block formation select and show squad formation
+        document.getElementById("formation_select").disabled = true;        
+        document.getElementById("formation_select").value = squads[currentSquadIndex].formation;
+        playerCart.forEach((cart) => {
+            if (squads[currentSquadIndex].principalePlayers[cart.id] !== "") {
+                const playerId = squads[currentSquadIndex].principalePlayers[cart.id];
+                const playerData = players.find(player => player.id === playerId);
+    
+                cart.setAttribute("data-player-id",playerData.id);
+                    
+                if (playerData.position.includes("GK")) {
+                    // show GK data
+                    cart.innerHTML = `
+                    <div class="text-[#eee] translate-y-5 flex justify-around invisible group-hover:visible">
+                        <i class="fas fa-plus cursor-pointer" onclick="choosePlayerModal(event)" title="add substitute at position"></i>
+                        <i onclick="changePlayerRole(event)" class="fas fa-exchange-alt cursor-pointer" title="make substitute"></i>
+                        <i onclick="removeFromSquad(event)" class="fas fa-times cursor-pointer" title="remove from squad"></i>
+                    </div>
+                    <img src="src/assets/img/badge_gold.webp" alt="">
+                    <!-- position and number -->
+                    <div class="player_positoin flex flex-col absolute top-[30%] left-[12%] text-[0.65em] -space-y-1">
+                        <p class="font-bold">${playerData.rating}</p>
+                        <p>${playerData.position[0]}</p> 
+                    </div>
+                    <!-- image -->
+                    <div class="player_image w-2/3 absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                        <img src="${playerData.photo}" alt="">
+                    </div>
+                    <!-- name and more -->
+                    <div class="w-4/5 flex flex-col items-center absolute top-[64%] left-[10%]">
+                        <p class="text-[0.53em] font-bold">${playerData.name}</p>
+                        <!-- player statistics -->
+                        <div class="palyer_statistics w-full flex flex-row justify-between text-[0.1em] -mt-1">
+                          <div class="flex flex-col items-center -space-y-[0.1rem]">
+                            <p class="font-semibold">DIV</p>
+                            <p class="font-extrabold">${playerData.diving}</p> 
+                          </div>
+                          <div class="flex flex-col items-center -space-y-[0.1rem]">
+                            <p class="font-semibold">HAN</p>
+                            <p class="font-extrabold">${playerData.handling}</p> 
+                          </div>
+                          <div class="flex flex-col items-center -space-y-[0.1rem]">
+                            <p class="font-semibold">KIC</p>
+                            <p class="font-extrabold">${playerData.kicking}</p> 
+                          </div>
+                          <div class="flex flex-col items-center -space-y-[0.1rem]">
+                            <p class="font-semibold">REF</p>
+                            <p class="font-extrabold">${playerData.reflexes}</p> 
+                          </div>
+                          <div class="flex flex-col items-center -space-y-[0.1rem]">
+                            <p class="font-semibold">SPD</p>
+                            <p class="font-extrabold">${playerData.speed}</p> 
+                          </div>
+                          <div class="flex flex-col items-center -space-y-[0.1rem]">
+                            <p class="font-semibold">POS</p>
+                            <p class="font-extrabold">${playerData.positioning}</p> 
+                          </div>
+                        </div>
+                        <!-- flags -->
+                        <div class="palyer_statistics w-full flex flex-row justify-center gap-2">
+                            <img src="${playerData.flag}" width="8%" alt="">
+                            <img src="${playerData.logo}" width="8%" alt="">
+                        </div>
+                    </div>
+                    <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">${playerData.position[0]}</div>
+                    `;
+                } else {
+                    // show data
+                    cart.innerHTML = `
+                    <div class="text-[#eee] translate-y-5 flex justify-around invisible group-hover:visible">
+                        <i class="fas fa-plus cursor-pointer" onclick="choosePlayerModal(event)" title="add substitute at position"></i>
+                        <i onclick="changePlayerRole(event)" class="fas fa-exchange-alt cursor-pointer" title="make substitute"></i>
+                        <i onclick="removeFromSquad(event)" class="fas fa-times cursor-pointer" title="remove from squad"></i>
+                    </div>
+                    <img src="src/assets/img/badge_gold.webp" alt="">
+                    <!-- position and number -->
+                    <div class="player_positoin flex flex-col absolute top-[30%] left-[12%] text-[0.65em] -space-y-1">
+                        <p class="font-bold">${playerData.rating}</p>
+                        <p>${playerData.position[0]}</p> 
+                    </div>
+                    <!-- image -->
+                    <div class="player_image w-2/3 absolute top-[44%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                        <img src="${playerData.photo}" alt="">
+                    </div>
+                    <!-- name and more -->
+                    <div class="w-4/5 flex flex-col items-center absolute top-[62%] left-[10%]">
+                        <p class="text-[0.53em] font-bold">${playerData.name}</p>
+                        <!-- player statistics -->
+                        <div class="palyer_statistics w-full flex flex-row justify-between text-[0.1em] -mt-]0.2rem]">
+                          <div class="flex flex-col items-center -space-y-[0.1rem]">
+                            <p class="font-semibold">PAC</p>
+                            <p class="font-extrabold">${playerData.pace}</p> 
+                          </div>
+                          <div class="flex flex-col items-center -space-y-[0.1rem]">
+                            <p class="font-semibold">SHO</p>
+                            <p class="font-extrabold">${playerData.shooting}</p> 
+                          </div>
+                          <div class="flex flex-col items-center -space-y-[0.1rem]">
+                            <p class="font-semibold">PAS</p>
+                            <p class="font-extrabold">${playerData.passing}</p> 
+                          </div>
+                          <div class="flex flex-col items-center -space-y-[0.1rem]">
+                            <p class="font-semibold">DRI</p>
+                            <p class="font-extrabold">${playerData.dribbling}</p> 
+                          </div>
+                          <div class="flex flex-col items-center -space-y-[0.1rem]">
+                            <p class="font-semibold">DEF</p>
+                            <p class="font-extrabold">${playerData.defending}</p> 
+                          </div>
+                          <div class="flex flex-col items-center -space-y-[0.1rem]">
+                            <p class="font-semibold">PHY</p>
+                            <p class="font-extrabold">${playerData.physical}</p> 
+                          </div>
+                        </div>
+                        <!-- flags -->
+                        <div class="palyer_statistics w-full flex flex-row justify-center gap-2">
+                            <img src="${playerData.flag}" width="8%" alt="">
+                            <img src="${playerData.logo}" width="8%" alt="">
+                        </div>
+                    </div>
+                    <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">${playerData.position[0]}</div>
+                    `;
+                }
+            }
+        });
+       }
+       else{
+        document.getElementById("formation_select").disabled = true;
+       }
+    }
+}
+
+showPlayersOnCampo()
