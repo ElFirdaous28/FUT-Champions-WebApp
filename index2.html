@@ -10,13 +10,13 @@
         <link rel="stylesheet" href="css/pitch.css">
         <script src="js/tailwind.js"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-      </head>
+    </head>
 <body class="bg-[#191919]">
     <header class="bg-[#2a4b3b] h-20 flex items-center justify-end p-10">
         <button onclick="showAddPlayerModel()" class="p-2 text-[#eee] border-2 rounded-lg focus:outline-none hover:bg-[#191919]">Add Player</button>
     </header>/
     <!--  -->
-    <div class="text-[#eee] py-10 flex flex-col lg:flex-row md:flex-row items-center md:items-end gap-y-10 lg:justify-around md:justify-around">
+    <div class="text-[#eee] py-10 flex flex-col lg:flex-row md:flex-row items-center md:items-start gap-y-10 lg:justify-around md:justify-around">
         <div class="w-11/12 lg:w-1/5 md:w-1/5 flex md:flex-col md:items-start items-center">
           <label for="formation_select" class="w-1/4 font-semibold mr-2">Formation</label>
           <select class="w-full bg-[#191919] border-2 border-[#2a4b3b] py-2 pl-5 rounded-lg focus:outline-none" name="" id="formation_select">
@@ -35,10 +35,10 @@
         </div>
     
         <div>
-          <button onclick="SaveSquad()" class="border-2 border-[#2a4b3b] py-2 px-3 rounded-lg hover:bg-[#2a4b3b]">Save squad</button>
+          <button onclick="SaveSquad()" class="border-2 border-[#2a4b3b] py-2 px-3 rounded-lg hover:bg-[#2a4b3b] mt-5">Save squad</button>
         </div>
     </div>
-    <main class="flex flex-col lg:flex-row md:flex-row justify-around items-center">
+    <main class="flex flex-col lg:flex-row md:flex-row justify-around items-start">
         <!-- campo container -->
         <div class="campo_container w-full lg:w-[60%] md:w-[55%] pt-14 lg:pt-28 md:pt-14">
             <div id="campo w-full" class="relative campo">
@@ -72,7 +72,7 @@
                         </button>
                     <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">LB</div>
                     </div>
-                    <div id="CB" data-position="CB1"  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%]">
+                    <div id="CB1" data-position="CB"  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%]">
                         <img src="src/assets/img/badge_gold.webp" alt="">
                         <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
@@ -81,7 +81,7 @@
                         </button>
                     <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">CB</div>
                     </div>
-                    <div id="CB" data-position="CB2"  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%]">
+                    <div id="CB2" data-position="CB"  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%]">
                         <img src="src/assets/img/badge_gold.webp" alt="">
                         <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
@@ -99,7 +99,7 @@
                         </button>
                     <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">RB</div>
                     </div>
-                    <div id="CM" data-position="CM1"  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%]">
+                    <div id="CM1" data-position="CM"  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%]">
                         <img src="src/assets/img/badge_gold.webp" alt="">
                         <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
@@ -108,7 +108,7 @@
                         </button>
                     <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">CM</div>
                     </div>
-                    <div id="CM" data-position="CM2"  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%]">
+                    <div id="CM2" data-position="CM"  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%]">
                         <img src="src/assets/img/badge_gold.webp" alt="">
                         <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
@@ -117,7 +117,7 @@
                         </button>
                     <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">CM</div>
                     </div>
-                    <div id="CM" data-position="CM3"  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%]">
+                    <div id="CM3" data-position="CM"  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%]">
                         <img src="src/assets/img/badge_gold.webp" alt="">
                         <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
@@ -216,17 +216,159 @@
             </div>
         </div>
     </main>
+    <!-- choose player Modal -->
+    <div id="choose_player_modal" class="fixed inset-0 bg-neutral-800 bg-opacity-50 flex items-center justify-center hidden">
+        <div id="choose_modal_content" class="w-1/2 h-3/4 overflow-y-auto scrollbar-hidden mx-auto mt-10 p-4 bg-neutral-800 rounded-lg shadow-lg">
+        <div id="close_choose_player_modal" class="flex justify-end items-center mb-4">
+            <i class="fas fa-times text-gray-400 cursor-pointer text-xl"></i>
+        </div>
+        <div class="mb-4">
+            <input class="w-full p-4 bg-neutral-700 text-white rounded-lg focus:outline-none" placeholder="search player" type="text">
+        </div>
+        <div id="players_container" class="flex flex-col gap-y-4">
+            
+        </div>
+        </div>
+    </div>
 
+  <!-- add player Modal -->
+  <div id="add_player_modal" class="fixed inset-0 bg-neutral-800 bg-opacity-50 flex items-center justify-center hidden">
+    <div id="add_modal_content" class="w-1/2 h-5/6 overflow-y-auto scrollbar-hidden mx-auto mt-10 p-4  bg-neutral-800 rounded-lg shadow-lg">
+      <div id="close_add_player_modal" class="flex justify-end items-center mb-4">
+        <i class="fas fa-times text-gray-400 cursor-pointer text-xl"></i>
+      </div>
+      <form id="add_player_form" class="text-white flex flex-col gap-y-10">
+        <!-- Name and Photo -->
+        <div class="flex justify-between items-end">
+          <div class="flex flex-col w-2/3">
+            <label for="player_name" class="mb-5">Player's Full Name</label>
+            <input id="player_name" name="player_name" type="text" required placeholder="Enter Full Name" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <!-- Photo -->
+          <div class="w-1/3 flex flex-col items-center">
+            <label for="playerPhotoInput" class="text-white rounded-lg cursor-pointer">Choose Photo</label>
+            <input type="file" id="playerPhotoInput" name="player_photo" accept="image/*" class="hidden" />
+            <img id="playerPhotoPreview" class="mt-4 w-16" src="src/assets/img/user.png" alt="Player Photo Preview" />
+          </div>
+        </div>
+        
+        <!-- Nationality -->
+        <div>
+          <h1>Nationality</h1>
+          <select id="nationality_select" name="nationality" class="p-2 bg-neutral-700 rounded-lg focus:outline-none w-2/3">
+            <option value=""></option>
+          </select>
+        </div>
+        
+        <!-- Club -->
+        <div>
+          <h1>Club</h1>
+          <select id="club_select" name="club" class="p-2 bg-neutral-700 rounded-lg focus:outline-none w-2/3">
+            <option value=""></option>
+          </select>
+        </div>
+        
+        <!-- Position -->
+        <div class="flex flex-col">
+          <label for="player_position">Player Position:</label>
+          <select id="player_position" name="position" onchange="statisticsFields()" class="p-2 bg-neutral-700 rounded-lg focus:outline-none w-2/3">
+            <option value=""></option>
+            <option value="RW">Right Wing (RW)</option>
+            <option value="ST">Striker (ST)</option>
+            <option value="CM">Central Midfielder (CM)</option>
+            <option value="CB">Center Back (CB)</option>
+            <option value="LW">Left Wing (LW)</option>
+            <option value="GK">Goalkeeper (GK)</option>
+            <option value="CDM">Central Defensive Midfielder (CDM)</option>
+            <option value="LB">Left Back (LB)</option>
+            <option value="RB">Right Back (RB)</option>
+          </select>
+        </div>        
+        <p id="numberInputError" class="text-red-500"></p>
+        <!-- Statistics -->
+        <div class="statistics grid grid-cols-2 gap-x-16 gap-y-2">
+          <!-- General Statistics -->
+          <div class="flex flex-col">
+            <label for="rating">Rating:</label>
+            <input id="rating" name="rating" type="number" value="0" min="0" max="100" required class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="other_positions flex flex-col">
+            <label for="pace">Pace:</label>
+            <input id="pace" name="pace" type="number" value="0" min="0" max="100" required class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="other_positions flex flex-col">
+            <label for="shooting">Shooting:</label>
+            <input id="shooting" name="shooting" type="number" value="0" min="0" max="100" required class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="other_positions flex flex-col">
+            <label for="passing">Passing:</label>
+            <input id="passing" name="passing" type="number" value="0" min="0" max="100" required class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="other_positions flex flex-col">
+            <label for="dribbling">Dribbling:</label>
+            <input id="dribbling" name="dribbling" type="number" value="0" min="0" max="100" required class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="other_positions flex flex-col">
+            <label for="defending">Defending:</label>
+            <input id="defending" name="defending" type="number" value="0" min="0" max="100" required class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="other_positions flex flex-col ">
+            <label for="physical">Physical:</label>
+            <input id="physical" name="physical" type="number" value="0" min="0" max="100" required class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          
+          <!-- GK Statistics -->
+          <div class="gk_position hidden flex flex-col">
+            <label for="diving">Diving:</label>
+            <input id="diving" name="diving" type="number" value="0" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="gk_position hidden flex flex-col">
+            <label for="handling">Handling:</label>
+            <input id="handling" name="handling" type="number" value="0" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="gk_position hidden flex flex-col">
+            <label for="kicking">Kicking:</label>
+            <input id="kicking" name="kicking" type="number" value="0" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="gk_position hidden flex flex-col">
+            <label for="reflexes">Reflexes:</label>
+            <input id="reflexes" name="reflexes" type="number" value="0" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="gk_position hidden flex flex-col">
+            <label for="speed">Speed:</label>
+            <input id="speed" name="speed" type="number" value="0" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="gk_position hidden flex flex-col ">
+            <label for="positioning" >Positioning:</label>
+            <input id="positioning" name="positioning" type="number" value="0" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+        </div>
+        
+        <!-- Submit Button -->
+        <button id="save_player_btn" data-player-id="" name="save_player" type="submit" class="border-2 border-[#2a4b3b] rounded-lg w-1/4 py-2 self-end hover:bg-[#2a4b3b]">Save</button>
+      </form>
+          
+    </div>
+  </div>
+
+    <!-- scripts -->
     <script src="postions.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/squads.js"></script>
     <script>
-        const campo = document.getElementById('campo');
-        const campoCarts = document.getElementById('campo_carts');
-        console.log(campo.offsetWidth, campo.offsetHeight);
-        campoCarts.style.width=campo.offsetWidth;
-        campoCarts.style.height=campo.offsetHeight;
-        console.log("changed");
-        
-        
-    </script>
+        // Handle image preview
+        document.getElementById("playerPhotoInput").addEventListener("change", function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+            const imgElement = document.getElementById("playerPhotoPreview");
+            imgElement.src = e.target.result;
+            imgElement.classList.remove("hidden"); // Show image preview
+            };
+            reader.readAsDataURL(file); // Read the file as a data URL
+        }
+        });
+    </script>  
 </body>
 </html>

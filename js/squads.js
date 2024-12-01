@@ -5,25 +5,17 @@ let clickedPosition;
 function changeFormation(e){
     const formation = e.target.value;
     if(formation==="442"){
-        document.getElementById("CM1").classList.replace("translate-y-[-710%]", "translate-y-[-730%]");
-        document.getElementById("CM2").classList.replace("translate-y-[-810%]", "translate-y-[-830%]");
-        document.getElementById("LW").classList.replace("translate-y-[-1150%]", "translate-y-[-1030%]");
         document.getElementById("LW").querySelector(".position_abr").textContent="LM";
         document.getElementById("LW").setAttribute("data-position","LM");
 
-        document.getElementById("RW").classList.replace("translate-y-[-1350%]", "translate-y-[-1230%]");
         document.getElementById("RW").querySelector(".position_abr").textContent="RM";
         document.getElementById("RW").setAttribute("data-position","RM");
 
-        document.getElementById("CM3").classList.replace("translate-y-[-970%]", "translate-y-[-1050%]");
-        document.getElementById("CM3").classList.replace("left-[42%]", "left-[50%]");
+        
         document.getElementById("CM3").querySelector(".position_abr").textContent="ST";
         document.getElementById("CM3").querySelector(".position_abr").id="ST2";
         document.getElementById("CM3").setAttribute("data-position","RM");
-
-        document.getElementById("ST").classList.replace("left-[42%]", "left-[32%]");
         document.getElementById("ST").querySelector(".position_abr").id="ST1";
-
     }
 }
 function SaveSquad() {
@@ -125,6 +117,7 @@ function addPlayerToSquad(e){
             const clickedPlayerId=e.target.closest(".player_item").getAttribute('data-player-id'); 
             squads[currentSquadIndex].principalePlayers[clickedPosition]=clickedPlayerId;                
             localStorage.setItem("squads", JSON.stringify(squads));
+            console.log("player added");              
         }
         // add to substitues
         if(e.target.closest(".player_item").parentElement.id==="add_to_substitues"){
@@ -203,136 +196,81 @@ function changePlayerRole(e) {
     }
 }
 
-function showPlayers(){
+function showPlayers() {
     const playersContainerSelect = document.getElementById("players_container_select");
     const playersContainer = document.getElementById("aside_players_container");
-    
+    playersContainer.innerHTML = ""; // Clear the container initially
 
-    if(playersContainerSelect.value==="squad_substitutes"){
-        const squadSubtitle = document.getElementById("squad_subtitle").value;
-        if(squadSubtitle){
-            const currentSquad = squads.find(squad=>squad.subtitle===squadSubtitle);
-            currentSquadPlayersIds = [].concat(...Object.values(currentSquad.substitutesPlayers));
-            console.log(currentSquadPlayersIds);
-            
-            playersContainer.innerHTML="";
-            
+    if (playersContainerSelect.value === "squad_substitutes") {
+        const squadSubtitleInput = document.getElementById("squad_subtitle");
+
+        if (inputNotEmpty(squadSubtitleInput, "Choose a squad first!")) {
+            const currentSquad = squads.find(squad => squad.subtitle === squadSubtitleInput.value);
+            const currentSquadPlayersIds = [].concat(...Object.values(currentSquad.substitutesPlayers));
+
             currentSquadPlayersIds.forEach(id => {
-                const player=localStoragePlayers.find(localStoragePlayer=>localStoragePlayer.id===id);
-                playersContainer.innerHTML+=`<div class="player_card relative text-black group">
-                                                <div class="text-[#eee] translate-y-5 flex justify-end invisible group-hover:visible">
-                                                    <i data-player-id=${player.id} onclick="removeFromSquad(event)" class="fas fa-times cursor-pointer mr-5" title="remove from squad"></i>
-                                                </div>
-                                                <img src="src/assets/img/badge_gold.webp" alt="">
-                                                <!-- position and rating -->
-                                                <div class="player_positoin flex flex-col absolute top-[25%] left-[15%]">
-                                                    <p class="text-[10px] lg:text-sm font-bold">${player.rating}</p>
-                                                    <p class="text-xs lg:text-xs">${player.position}</p> 
-                                                </div>
-                                                <!-- image -->
-                                                <div class="player_image w-2/3 absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                                                    <img src="${player.photo}" alt="">
-                                                </div>
-                                                <!-- name and more -->
-                                                <div class="w-4/5 flex flex-col items-center absolute top-[63%] left-[10%]">
-                                                    <p class="text-xs lg:text-xs md:text-xs font-bold">${player.name}</p>
-                                                    <!-- player statistics -->
-                                                    <div class="palyer_statistics w-full flex flex-row justify-around text-[6px] lg:text-[0.5em] md:text-[0.5em]">
-                                                    <div class="flex flex-col items-center">
-                                                        <p class="font-semibold">PAC</p>
-                                                        <p class="font-extrabold">80</p> 
-                                                    </div>
-                                                    <div class="flex flex-col items-center">
-                                                        <p class="font-semibold">SHO</p>
-                                                        <p class="font-extrabold">87</p> 
-                                                    </div>
-                                                    <div class="flex flex-col items-center">
-                                                        <p class="font-semibold">PAS</p>
-                                                        <p class="font-extrabold">90</p> 
-                                                    </div>
-                                                    <div class="flex flex-col items-center">
-                                                        <p class="font-semibold">DRI</p>
-                                                        <p class="font-extrabold">94</p> 
-                                                    </div>
-                                                    <div class="flex flex-col items-center">
-                                                        <p class="font-semibold">DEF</p>
-                                                        <p class="font-extrabold">33</p> 
-                                                    </div>
-                                                    <div class="flex flex-col items-center">
-                                                        <p class="font-semibold">PHY</p>
-                                                        <p class="font-extrabold">64</p> 
-                                                    </div>
-                                                    </div>
-                                                    <!-- flags -->
-                                                    <div class="palyer_statistics w-full flex flex-row justify-center gap-2">
-                                                    <img src="https://cdn.sofifa.net/flags/pt.png" width="10%" alt="">
-                                                    <img src="https://cdn.sofifa.net/meta/team/271/30.png" width="10%" alt="">
-                                                    <img src="https://cdn.sofifa.net/meta/team/2506/120.png" width="10%" alt="">
-                                                    </div>
-                                                </div>
-                                                </div>` 
-            })
+                const player = localStoragePlayers.find(localStoragePlayer => localStoragePlayer.id === id);
+                if (player) playersContainer.innerHTML += generatePlayerCard(player,"substitut");
+            });
         }
-        else{
-            playersContainer.innerHTML=`<p class="col-span-3">No squad selected!</p>`;
-        }
-        
-    }
-    else if(playersContainerSelect.value==="all_players"){        
-        playersContainer.innerHTML="";
+    } else if (playersContainerSelect.value === "all_players") {
         localStoragePlayers.forEach(player => {
-           playersContainer.innerHTML+=`<div class="group player_card relative text-black group:">
-                                            <img src="src/assets/img/badge_gold.webp" alt="">
-                                            <!-- position and rating -->
-                                            <div class="player_positoin flex flex-col absolute top-[25%] left-[15%]">
-                                                <p class="text-[10px] lg:text-sm font-bold">${player.rating}</p>
-                                                <p class="text-xs lg:text-xs">${player.position}</p> 
-                                            </div>
-                                            <!-- image -->
-                                            <div class="player_image w-2/3 absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                                                <img src="${player.photo}" alt="">
-                                            </div>
-                                            <!-- name and more -->
-                                            <div class="w-4/5 flex flex-col items-center absolute top-[63%] left-[10%]">
-                                                <p class="text-xs lg:text-xs md:text-xs font-bold">${player.name}</p>
-                                                <!-- player statistics -->
-                                                <div class="palyer_statistics w-full flex flex-row justify-around text-[6px] lg:text-[0.5em] md:text-[0.5em]">
-                                                <div class="flex flex-col items-center">
-                                                    <p class="font-semibold">PAC</p>
-                                                    <p class="font-extrabold">80</p> 
-                                                </div>
-                                                <div class="flex flex-col items-center">
-                                                    <p class="font-semibold">SHO</p>
-                                                    <p class="font-extrabold">87</p> 
-                                                </div>
-                                                <div class="flex flex-col items-center">
-                                                    <p class="font-semibold">PAS</p>
-                                                    <p class="font-extrabold">90</p> 
-                                                </div>
-                                                <div class="flex flex-col items-center">
-                                                    <p class="font-semibold">DRI</p>
-                                                    <p class="font-extrabold">94</p> 
-                                                </div>
-                                                <div class="flex flex-col items-center">
-                                                    <p class="font-semibold">DEF</p>
-                                                    <p class="font-extrabold">33</p> 
-                                                </div>
-                                                <div class="flex flex-col items-center">
-                                                    <p class="font-semibold">PHY</p>
-                                                    <p class="font-extrabold">64</p> 
-                                                </div>
-                                                </div>
-                                                <!-- flags -->
-                                                <div class="palyer_statistics w-full flex flex-row justify-center gap-2">
-                                                <img src="https://cdn.sofifa.net/flags/pt.png" width="10%" alt="">
-                                                <img src="https://cdn.sofifa.net/meta/team/271/30.png" width="10%" alt="">
-                                                <img src="https://cdn.sofifa.net/meta/team/2506/120.png" width="10%" alt="">
-                                                </div>
-                                            </div>
-                                            </div>` 
+            playersContainer.innerHTML += generatePlayerCard(player,"principlae");
         });
     }
 }
+
+function generatePlayerCard(player,role) {
+    const statisticsHTML = player.position.includes('GK') 
+        ? `
+            <div class="player_statistics w-full flex flex-row justify-between text-[0.3rem] lg:text-[0.5em] md:text-[0.08em]">
+                <div class="flex flex-col items-center -space-y-[0.1rem]"><p class="font-semibold">DIV</p><p class="font-extrabold">${player.diving}</p></div>
+                <div class="flex flex-col items-center -space-y-[0.1rem]"><p class="font-semibold">HAN</p><p class="font-extrabold">${player.handling}</p></div>
+                <div class="flex flex-col items-center -space-y-[0.1rem]"><p class="font-semibold">KIC</p><p class="font-extrabold">${player.kicking}</p></div>
+                <div class="flex flex-col items-center -space-y-[0.1rem]"><p class="font-semibold">REF</p><p class="font-extrabold">${player.reflexes}</p></div>
+                <div class="flex flex-col items-center -space-y-[0.1rem]"><p class="font-semibold">SPD</p><p class="font-extrabold">${player.speed}</p></div>
+                <div class="flex flex-col items-center -space-y-[0.1rem]"><p class="font-semibold">POS</p><p class="font-extrabold">${player.positioning}</p></div>
+            </div>
+        `
+        : `
+            <div class="player_statistics w-full flex flex-row justify-between text-[0.3rem] lg:text-[0.5em] md:text-[0.08em]">
+                <div class="flex flex-col items-center -space-y-[0.1rem]"><p class="font-semibold">PAC</p><p class="font-extrabold">${player.pace}</p></div>
+                <div class="flex flex-col items-center -space-y-[0.1rem]"><p class="font-semibold">SHO</p><p class="font-extrabold">${player.shooting}</p></div>
+                <div class="flex flex-col items-center -space-y-[0.1rem]"><p class="font-semibold">PAS</p><p class="font-extrabold">${player.passing}</p></div>
+                <div class="flex flex-col items-center -space-y-[0.1rem]"><p class="font-semibold">DRI</p><p class="font-extrabold">${player.dribbling}</p></div>
+                <div class="flex flex-col items-center -space-y-[0.1rem]"><p class="font-semibold">DEF</p><p class="font-extrabold">${player.defending}</p></div>
+                <div class="flex flex-col items-center -space-y-[0.1rem]"><p class="font-semibold">PHY</p><p class="font-extrabold">${player.physical}</p></div>
+            </div>
+        `;
+
+    return `
+        <div class="player_card relative text-black ${role === "substitut" ? "group" : " "}">
+            ${role === "substitut" ? `
+                <div class="text-[#eee] translate-y-5 flex justify-end invisible group-hover:visible">
+                    <i data-player-id="${player.id}" onclick="removeFromSquad(event)" class="fas fa-times cursor-pointer mr-5" title="remove from squad"></i>
+                </div>
+            ` : ""}
+            <img src="src/assets/img/badge_gold.webp" alt="">
+            <div class="player_positoin flex flex-col absolute top-[25%] left-[15%] -space-y-1">
+                <p class="text-[0.5rem] lg:text-xs md:text-[0.6rem] font-bold">${player.rating}</p>
+                <p class="text-[0.5rem] lg:text-xs md:text-[0.6rem]">${player.position[0]}</p>
+            </div>
+            <div class="player_image w-2/3 absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <img src="${player.photo}" alt="${player.name}">
+            </div>
+            <div class="w-4/5 flex flex-col items-center absolute top-[60%] lg:top-[62%] md:top-[60%] left-[10%]">
+                <p class="text-[0.5rem] lg:text-xs md:text-[0.6rem] font-bold">${player.name}</p>
+                ${statisticsHTML}
+                <div class="palyer_statistics w-full flex flex-row justify-center gap-2">
+                    <img src="${player.flag}" width="10%" alt="${player.nationality}">
+                    <img src="${player.logo}" width="10%" alt="${player.club}">
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+
 document.addEventListener("DOMContentLoaded",showPlayers());
 
 
@@ -363,12 +301,14 @@ function choosePlayerModal(e){
     if(inputNotEmpty(subtitleInput,"Enter the squad subtitle or create a new squad")&&currentSquad){
         const choosePlayerModal=document.getElementById("choose_player_modal");
         const playersContainer = document.getElementById("players_container");
+        
         choosePlayerModal.classList.remove("hidden");
         clickedPosition=e.target.closest(".player_card").id;        
 
         let PlayerPosition = e.target.tagName === "I" ? e.target.parentElement.parentElement.getAttribute("data-position") : e.target.closest("button").parentElement.getAttribute("data-position");
         playersContainer.id= e.target.tagName === "I" ? "add_to_substitues" : "add_to_principale";
         playersContainer.innerHTML="";
+        
         players.forEach(player => {
             if(player.position.includes(PlayerPosition)){            
                 const positions = player.position.join(' / ');            
