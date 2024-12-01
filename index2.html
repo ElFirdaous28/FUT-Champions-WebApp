@@ -13,7 +13,7 @@
     </head>
 <body class="bg-[#191919]">
     <header class="h-20 flex items-center justify-end p-10">
-        <button onclick="showAddPlayerModel()" class="px-3 py-2 bg-[#2a4b3b] text-[#eee] border-2 rounded-lg focus:outline-none hover:bg-[#191919] hover:border-[#2a4b3b]">Add Player</button>
+        <button onclick="showAddPlayerModel()" class="px-3 py-2 bg-[#2a4b3b] text-[#eee] border-2 border-[#191919] rounded-lg focus:outline-none hover:bg-[#191919] hover:border-[#2a4b3b]">Add Player</button>
     </header>
     <!--  -->
     <h1 class="text-[#eee] ml-[4%]">Create nwe squad or modify an old one by writting its subtitle</h1>
@@ -27,12 +27,12 @@
         </div>
         <div class="w-11/12 lg:w-1/5 md:w-1/5 flex md:flex-col md:items-start items-center">
           <label for="squad_title" class="w-1/4 font-semibold mr-2">Title</label>
-          <input class="w-full bg-[#191919] border-2 border-[#2a4b3b] py-2 pl-5 rounded-lg placeholder-gray-500" required type="text" name="" id="squad_title" placeholder="Title of squad">
+          <input class="w-full bg-[#191919] border-2 border-[#2a4b3b] py-2 pl-5 rounded-lg placeholder-gray-500" type="text" name="" id="squad_title" placeholder="Title of squad">
         </div>
     
         <div class="w-11/12 lg:w-1/5 md:w-1/5 flex md:flex-col md:items-start items-center">
           <label for="squad_subtitle" class="w-1/4 font-semibold mr-2">Subtitle</label>
-          <input onchange="showPlayersOnCampo()" class="w-full bg-[#191919] border-2 border-[#2a4b3b] py-2 pl-5 rounded-lg placeholder-gray-500" required type="text" name="" id="squad_subtitle" placeholder="Subtitle of squad">
+          <input onchange="showPlayersOnCampo()" class="w-full bg-[#191919] border-2 border-[#2a4b3b] py-2 pl-5 rounded-lg placeholder-gray-500" type="text" name="" id="squad_subtitle" placeholder="Subtitle of squad">
         </div>
     
         <div>
@@ -243,7 +243,7 @@
         <div class="flex justify-between items-end">
           <div class="flex flex-col w-2/3">
             <label for="player_name" class="mb-5">Player's Full Name</label>
-            <input id="player_name" name="player_name" type="text" required placeholder="Enter Full Name" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+            <input id="player_name" name="player_name" type="text" placeholder="Enter Full Name" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
           </div>
           <!-- Photo -->
           <div class="w-1/3 flex flex-col items-center">
@@ -291,57 +291,57 @@
           <!-- General Statistics -->
           <div class="flex flex-col">
             <label for="rating">Rating:</label>
-            <input id="rating" name="rating" type="number" value="0" min="0" max="100" required class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+            <input id="rating" name="rating" type="number" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
           </div>
           <div class="other_positions flex flex-col">
             <label for="pace">Pace:</label>
-            <input id="pace" name="pace" type="number" value="0" min="0" max="100" required class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+            <input id="pace" name="pace" type="number" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
           </div>
           <div class="other_positions flex flex-col">
             <label for="shooting">Shooting:</label>
-            <input id="shooting" name="shooting" type="number" value="0" min="0" max="100" required class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+            <input id="shooting" name="shooting" type="number" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
           </div>
           <div class="other_positions flex flex-col">
             <label for="passing">Passing:</label>
-            <input id="passing" name="passing" type="number" value="0" min="0" max="100" required class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+            <input id="passing" name="passing" type="number" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
           </div>
           <div class="other_positions flex flex-col">
             <label for="dribbling">Dribbling:</label>
-            <input id="dribbling" name="dribbling" type="number" value="0" min="0" max="100" required class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+            <input id="dribbling" name="dribbling" type="number" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
           </div>
           <div class="other_positions flex flex-col">
             <label for="defending">Defending:</label>
-            <input id="defending" name="defending" type="number" value="0" min="0" max="100" required class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+            <input id="defending" name="defending" type="number" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
           </div>
           <div class="other_positions flex flex-col ">
             <label for="physical">Physical:</label>
-            <input id="physical" name="physical" type="number" value="0" min="0" max="100" required class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+            <input id="physical" name="physical" type="number" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
           </div>
           
           <!-- GK Statistics -->
           <div class="gk_position hidden flex flex-col">
             <label for="diving">Diving:</label>
-            <input id="diving" name="diving" type="number" value="0" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+            <input id="diving" name="diving" type="number" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
           </div>
           <div class="gk_position hidden flex flex-col">
             <label for="handling">Handling:</label>
-            <input id="handling" name="handling" type="number" value="0" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+            <input id="handling" name="handling" type="number" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
           </div>
           <div class="gk_position hidden flex flex-col">
             <label for="kicking">Kicking:</label>
-            <input id="kicking" name="kicking" type="number" value="0" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+            <input id="kicking" name="kicking" type="number" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
           </div>
           <div class="gk_position hidden flex flex-col">
             <label for="reflexes">Reflexes:</label>
-            <input id="reflexes" name="reflexes" type="number" value="0" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+            <input id="reflexes" name="reflexes" type="number" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
           </div>
           <div class="gk_position hidden flex flex-col">
             <label for="speed">Speed:</label>
-            <input id="speed" name="speed" type="number" value="0" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+            <input id="speed" name="speed" type="number" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
           </div>
           <div class="gk_position hidden flex flex-col ">
             <label for="positioning" >Positioning:</label>
-            <input id="positioning" name="positioning" type="number" value="0" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+            <input id="positioning" name="positioning" type="number" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
           </div>
         </div>
         

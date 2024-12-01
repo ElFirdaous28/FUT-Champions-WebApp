@@ -56,6 +56,9 @@ function closeModal(modalId) {
 
 // add player functions
 function showAddPlayerModel(){
+    // Clear the form and reset photo
+    document.getElementById("add_player_form").reset();
+    document.getElementById("playerPhotoPreview").src = "src/assets/img/user.png";
     const addPlayerModal=document.getElementById("add_player_modal");
     addPlayerModal.classList.remove("hidden");
     showNtionalitySelect();
@@ -122,27 +125,63 @@ function statisticsFields(){
     }
 }
 
-// Check if field is empty and show error
-function notEmptyField(element) {
+// Check if select is empty and show error
+function notEmptySelect(element) {
     const errorMessage = element.parentElement.querySelector("#errorMessage");
     if (errorMessage) {
         errorMessage.remove();
     }
     if (element.value === "") {
-        showError(element, "Please choose an option");
+        const errorMessage = document.createElement('p');
+        errorMessage.textContent = "Please choose an option";
+        errorMessage.id = 'errorMessage';
+        errorMessage.classList.add('text-red-500');
+        element.parentElement.insertAdjacentElement('beforeend', errorMessage);
         return false;
     } 
     return true;
 }
+// chek input
+function inputNotEmpty(inputElement,message){
+    const existingError = document.querySelector(".error-message");
+    if (existingError) {
+        existingError.remove();
+    }
+    if(inputElement.value===""){
+        const pError = document.createElement("p");
+        pError.textContent = message;
+        pError.classList.add("error-message", "text-red-500"); // Add a class for styling
+        inputElement.parentElement.appendChild(pError);
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+// check number input value
+function numberInputVlaide(inputElement) {
+    // Check for an existing error message specific to this input
+    const existingError = inputElement.parentNode.querySelector(".error-message");
+    if (existingError) {
+        existingError.remove();
+    }
 
+    // Validate input value
+    if (inputElement.value === "" || inputElement.value < 0 || inputElement.value > 100) {
+        console.log("not okay");
 
+        // Create and insert the error message
+        const pError = document.createElement("p");
+        pError.textContent = "This input's value should be between 0 and 100";
+        pError.classList.add("error-message", "text-red-500"); // Add a class for styling
+        console.log(inputElement);
 
-function showError(element, message) {
-    const errorMessage = document.createElement('p');
-    errorMessage.textContent = message;
-    errorMessage.id = 'errorMessage';
-    errorMessage.classList.add('text-red-500');
-    element.parentElement.insertAdjacentElement('beforeend', errorMessage);
+        inputElement.parentElement.insertBefore(pError, inputElement);
+        return false;
+    } else {
+        console.log("okay");
+        return true;
+    }
 }
 
 
@@ -157,10 +196,31 @@ document.getElementById("add_player_form").addEventListener("submit", function (
     const flag = countriesAndFlags.find(item => item.country === nationality)?.flag;
     const logo = clubsAndLogos.find(item => item.club === club)?.logo;
 
-    // Ensure all fields are filled
-    if (notEmptyField(document.getElementById("club_select")) &&
-        notEmptyField(document.getElementById("player_position")) &&
-        notEmptyField(document.getElementById("nationality_select"))) {
+    // Ensure all fields are okay
+    if (
+        inputNotEmpty(document.getElementById("player_name"), "Give the player name!") &&
+        notEmptySelect(document.getElementById("nationality_select")) &&
+        notEmptySelect(document.getElementById("club_select")) &&
+        notEmptySelect(document.getElementById("player_position"))
+    ) {
+
+        const numericFields = position === "GK" 
+            ? ["rating","diving", "handling", "kicking", "reflexes", "speed", "positioning"] 
+            : ["rating","pace", "shooting", "passing", "dribbling", "defending", "physical"];
+
+        let isValid = true;
+        // check numeric fields
+        numericFields.forEach(fieldId => {
+            const inputElement = document.getElementById(fieldId);
+            if (!numberInputVlaide(inputElement)) {
+                isValid = false;
+            }
+        });
+
+        // If any numeric field is invalid, stop execution
+        if (!isValid) {
+            return;
+        }
 
         // Extract form values
         const name = document.getElementById("player_name").value;
@@ -177,7 +237,7 @@ document.getElementById("add_player_form").addEventListener("submit", function (
             rating,
         };
 
-        // in case of goalkeepers
+        // In case of goalkeepers
         if (position === "GK") {
             newPlayer.diving = parseInt(document.getElementById("diving").value);
             newPlayer.handling = parseInt(document.getElementById("handling").value);
@@ -185,8 +245,7 @@ document.getElementById("add_player_form").addEventListener("submit", function (
             newPlayer.reflexes = parseInt(document.getElementById("reflexes").value);
             newPlayer.speed = parseInt(document.getElementById("speed").value);
             newPlayer.positioning = parseInt(document.getElementById("positioning").value);
-        } 
-        else { // For other positions
+        } else { // For other positions
             newPlayer.pace = parseInt(document.getElementById("pace").value);
             newPlayer.shooting = parseInt(document.getElementById("shooting").value);
             newPlayer.passing = parseInt(document.getElementById("passing").value);
@@ -194,16 +253,15 @@ document.getElementById("add_player_form").addEventListener("submit", function (
             newPlayer.defending = parseInt(document.getElementById("defending").value);
             newPlayer.physical = parseInt(document.getElementById("physical").value);
         }
+
         const playerId = document.getElementById("save_player_btn").getAttribute("data-player-id");
-        
-        // creat a new player if playerId is empty
+
+        // Create a new player if playerId is empty
         if (playerId === "") {
             newPlayer.id = `player-${players.length + 1}`;
             players.push(newPlayer); // Add new player to the array
             alert("Player added successfully!");
-        } 
-        // modify a new player if playerId is not empty
-        else {
+        } else { // Modify an existing player if playerId is not empty
             const playerIndex = players.findIndex(player => player.id === playerId);
             if (playerIndex !== -1) {
                 newPlayer.id = playerId; // Keep the same ID
@@ -214,10 +272,8 @@ document.getElementById("add_player_form").addEventListener("submit", function (
         }
 
         localStorage.setItem("players", JSON.stringify(players));
+        document.getElementById("add_player_form").classList.add("hidden")
 
-        // Clear the form and reset photo
-        document.getElementById("add_player_form").reset();
-        document.getElementById("playerPhotoPreview").src = "src/assets/img/user.png";
 
         // Reset the data-player-id attribute
         document.getElementById("save_player_btn").setAttribute("data-player-id", "");
@@ -225,12 +281,11 @@ document.getElementById("add_player_form").addEventListener("submit", function (
 });
 
 
-
 // function to show  modification modal  of player
 function modifyPlayer(event) {
     // Show the add_player_modal as modify modal and hide chooseuser modal
     document.getElementById("add_player_modal").classList.remove("hidden");
-    document.getElementById("choose_player_modal").classList.add("hidden");
+    // document.getElementById("choose_player_modal").classList.add("hidden");
 
     const playerId = event.target.closest("button").getAttribute("data-player-id");
     
