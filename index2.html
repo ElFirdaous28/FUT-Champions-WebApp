@@ -38,10 +38,10 @@
           <button onclick="SaveSquad()" class="border-2 border-[#2a4b3b] py-2 px-3 rounded-lg hover:bg-[#2a4b3b]">Save squad</button>
         </div>
     </div>
-    <main class="flex flex-col lg:flex-row md:flex-row justify-around">
+    <main class="flex flex-col lg:flex-row md:flex-row justify-around items-center">
         <!-- campo container -->
-        <div class="campo_container h-screen w-full lg:w-[60%] md:w-[75%] pt-32">
-            <div id="campo" class="relative campo">
+        <div class="campo_container w-full lg:w-[60%] md:w-[55%] pt-14 lg:pt-28 md:pt-14">
+            <div id="campo w-full" class="relative campo">
                 <div class="corner">
                   <div class="corner1"></div>
                   <div class="corner2"></div>
@@ -157,8 +157,8 @@
             </div>
         </div>
         <!-- players container -->
-        <div class="border-2 border-[#2a4b3b] rounded-md w-[30%] text-[#eee] flex flex-col items-center">
-            <select id="players_container_select" onchange="showPlayers()" name="" id="" class="bg-[#191919] border-2 border-[#2a4b3b] w-1/5 py-2 pl-5 rounded-lg focus:outline-none my-4">
+        <div class="border-2 border-[#2a4b3b] rounded-md h-fit w-4/5 my-20 lg:w-[30%] md:w-[40%] text-[#eee] flex flex-col items-center">
+            <select id="players_container_select" onchange="showPlayers()" name="" class="bg-[#191919] border-2 border-[#2a4b3b] py-2 pl-5 rounded-lg focus:outline-none my-4">
             <option value="all_players">All Players</option>
             <option value="squad_substitutes">Squad Substitutes</option>
             </select>
@@ -167,40 +167,40 @@
             <div  class="player_card relative text-black ">
                 <img src="src/assets/img/badge_gold.webp" alt="">
                 <!-- position and number -->
-                <div class="player_positoin flex flex-col absolute top-[25%] left-[15%]">
-                  <p class="text-[10px] lg:text-sm font-bold">90</p>
-                  <p class="text-xs lg:text-xs">CF</p> 
+                <div class="player_positoin flex flex-col absolute top-[25%] left-[15%] -space-y-1">
+                  <p class="text-[0.5rem] lg:text-xs md:text-[0.6rem] font-bold">90</p>
+                  <p class="text-[0.5rem] lg:text-xs md:text-[0.6rem]">CF</p> 
                 </div>
                 <!-- image -->
                 <div class="player_image w-2/3 absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                   <img src="https://cdn.sofifa.net/players/158/023/25_120.png" alt="">
                 </div>
                 <!-- name and more -->
-                <div class="w-4/5 flex flex-col items-center absolute top-[62%] left-[10%]">
-                  <p class="text-xs lg:text-xs md:text-xs font-bold">Messi</p>
+                <div class="w-4/5 flex flex-col items-center absolute top-[60%] lg:top-[62%] md:top-[60%] left-[10%]">
+                  <p class="text-[0.5rem] lg:text-xs md:text-[0.6rem] font-bold">Messi</p>
                   <!-- player statistics -->
-                  <div class="palyer_statistics w-full flex flex-row justify-around text-[6px] lg:text-[0.5em] md:text-[0.5em]">
-                    <div class="flex flex-col items-center">
+                  <div class="palyer_statistics w-full flex flex-row justify-between text-[0.3rem] lg:text-[0.5em] md:text-[0.08em]">
+                    <div class="flex flex-col items-center -space-y-[0.1rem] md:-space-y-[0.15rem] lg:space-y-0">
                       <p class="font-semibold">PAC</p>
                       <p class="font-extrabold">80</p> 
                     </div>
-                    <div class="flex flex-col items-center">
+                    <div class="flex flex-col items-center -space-y-[0.1rem] md:-space-y-[0.15rem] lg:space-y-0">
                       <p class="font-semibold">SHO</p>
                       <p class="font-extrabold">87</p> 
                     </div>
-                    <div class="flex flex-col items-center">
+                    <div class="flex flex-col items-center -space-y-[0.1rem] md:-space-y-[0.15rem] lg:space-y-0">
                       <p class="font-semibold">PAS</p>
                       <p class="font-extrabold">90</p> 
                     </div>
-                    <div class="flex flex-col items-center">
+                    <div class="flex flex-col items-center -space-y-[0.1rem] md:-space-y-[0.15rem] lg:space-y-0">
                       <p class="font-semibold">DRI</p>
                       <p class="font-extrabold">94</p> 
                     </div>
-                    <div class="flex flex-col items-center">
+                    <div class="flex flex-col items-center -space-y-[0.1rem] md:-space-y-[0.15rem] lg:space-y-0">
                       <p class="font-semibold">DEF</p>
                       <p class="font-extrabold">33</p> 
                     </div>
-                    <div class="flex flex-col items-center">
+                    <div class="flex flex-col items-center -space-y-[0.1rem] md:-space-y-[0.15rem] lg:space-y-0">
                       <p class="font-semibold">PHY</p>
                       <p class="font-extrabold">64</p> 
                     </div>
@@ -212,7 +212,7 @@
                     <img src="https://cdn.sofifa.net/meta/team/2506/120.png" width="10%" alt="">
                   </div>
                 </div>
-              </div>
+            </div>
             </div>
         </div>
     </main>
