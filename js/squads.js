@@ -274,8 +274,8 @@ function generatePlayerCard(player,role) {
             <div class="player_image w-2/3 absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 <img src="${player.photo}" alt="${player.name}">
             </div>
-            <div class="w-4/5 flex flex-col items-center absolute top-[60%] lg:top-[62%] md:top-[60%] left-[10%]">
-                <p class="text-[0.5rem] lg:text-xs md:text-[0.6rem] font-bold">${player.name}</p>
+            <div class="w-4/5 flex flex-col items-center absolute top-[62%] lg:top-[62%] md:top-[62%] left-[10%]">
+                <p class="text-[0.5rem] lg:text-xs md:text-[0.4rem] font-bold">${player.name}</p>
                 ${statisticsHTML}
                 <div class="palyer_statistics w-full flex flex-row justify-center gap-2">
                     <img src="${player.flag}" width="10%" alt="${player.nationality}">
@@ -319,7 +319,8 @@ function choosePlayerModal(e){
         const playersContainer = document.getElementById("players_container");
         
         choosePlayerModal.classList.remove("hidden");
-        clickedPosition=e.target.closest(".player_card").id;        
+        clickedPosition=clickedPosition=e.target.closest(".cart").id;
+                
 
         let PlayerPosition = e.target.tagName === "I" ? e.target.parentElement.parentElement.getAttribute("data-position") : e.target.closest("button").parentElement.getAttribute("data-position");
         playersContainer.id= e.target.tagName === "I" ? "add_to_substitues" : "add_to_principale";
@@ -408,40 +409,40 @@ function showPlayersOnCampo() {
                     </div>
                     <img src="src/assets/img/badge_gold.webp" alt="">
                     <!-- position and number -->
-                    <div class="player_positoin flex flex-col absolute top-[30%] left-[12%] text-[0.65em] -space-y-1">
+                    <div class="player_positoin flex flex-col absolute top-[30%] left-[12%]">
                         <p class="font-bold">${playerData.rating}</p>
                         <p>${playerData.position[0]}</p> 
                     </div>
                     <!-- image -->
-                    <div class="player_image w-2/3 absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <div class="player_image w-2/3 absolute top-[38%] lg:top-[40%] md:top-[38%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                         <img src="${playerData.photo}" alt="">
                     </div>
                     <!-- name and more -->
-                    <div class="w-4/5 flex flex-col items-center absolute top-[64%] left-[10%]">
-                        <p class="text-[0.53em] font-bold">${playerData.name}</p>
+                    <div class="w-4/5 flex flex-col items-center absolute top-[58%] md:top-[62%] lg:top-[61%] left-[10%]">
+                        <p class="font-bold">${playerData.name}</h1>
                         <!-- player statistics -->
-                        <div class="palyer_statistics w-full flex flex-row justify-between text-[0.1em] -mt-1">
-                          <div class="flex flex-col items-center -space-y-[0.1rem]">
+                        <div class="palyer_statistics w-full flex flex-row justify-between ">
+                          <div class="flex flex-col items-center -space-y-[0.04rem] md:-space-y-[0.1rem]">
                             <p class="font-semibold">DIV</p>
                             <p class="font-extrabold">${playerData.diving}</p> 
                           </div>
-                          <div class="flex flex-col items-center -space-y-[0.1rem]">
+                          <div class="flex flex-col items-center -space-y-[0.04rem] md:-space-y-[0.1rem]">
                             <p class="font-semibold">HAN</p>
                             <p class="font-extrabold">${playerData.handling}</p> 
                           </div>
-                          <div class="flex flex-col items-center -space-y-[0.1rem]">
+                          <div class="flex flex-col items-center -space-y-[0.04rem] md:-space-y-[0.1rem]">
                             <p class="font-semibold">KIC</p>
                             <p class="font-extrabold">${playerData.kicking}</p> 
                           </div>
-                          <div class="flex flex-col items-center -space-y-[0.1rem]">
+                          <div class="flex flex-col items-center -space-y-[0.04rem] md:-space-y-[0.1rem]">
                             <p class="font-semibold">REF</p>
                             <p class="font-extrabold">${playerData.reflexes}</p> 
                           </div>
-                          <div class="flex flex-col items-center -space-y-[0.1rem]">
+                          <div class="flex flex-col items-center -space-y-[0.04rem] md:-space-y-[0.1rem]">
                             <p class="font-semibold">SPD</p>
                             <p class="font-extrabold">${playerData.speed}</p> 
                           </div>
-                          <div class="flex flex-col items-center -space-y-[0.1rem]">
+                          <div class="flex flex-col items-center -space-y-[0.04rem] md:-space-y-[0.1rem]">
                             <p class="font-semibold">POS</p>
                             <p class="font-extrabold">${playerData.positioning}</p> 
                           </div>
@@ -464,40 +465,40 @@ function showPlayersOnCampo() {
                     </div>
                     <img src="src/assets/img/badge_gold.webp" alt="">
                     <!-- position and number -->
-                    <div class="player_positoin flex flex-col absolute top-[30%] left-[12%] text-[0.65em] -space-y-1">
+                    <div class="player_positoin flex flex-col absolute top-[30%] left-[12%]">
                         <p class="font-bold">${playerData.rating}</p>
                         <p>${playerData.position[0]}</p> 
                     </div>
                     <!-- image -->
-                    <div class="player_image w-2/3 absolute top-[44%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <div class="player_image w-2/3 absolute top-[38%] lg:top-[40%] md:top-[38%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                         <img src="${playerData.photo}" alt="">
                     </div>
                     <!-- name and more -->
-                    <div class="w-4/5 flex flex-col items-center absolute top-[62%] left-[10%]">
-                        <p class="text-[0.53em] font-bold">${playerData.name}</p>
+                    <div class="w-4/5 flex flex-col items-center absolute top-[58%] md:top-[62%] lg:top-[61%] left-[10%]">
+                        <p class="font-bold">${playerData.name}</p>
                         <!-- player statistics -->
-                        <div class="palyer_statistics w-full flex flex-row justify-between text-[0.1em] -mt-]0.2rem]">
-                          <div class="flex flex-col items-center -space-y-[0.1rem]">
+                        <div class="palyer_statistics w-full flex flex-row justify-between">
+                          <div class="flex flex-col items-center -space-y-[0.04rem] md:-space-y-[0.1rem]">
                             <p class="font-semibold">PAC</p>
                             <p class="font-extrabold">${playerData.pace}</p> 
                           </div>
-                          <div class="flex flex-col items-center -space-y-[0.1rem]">
+                          <div class="flex flex-col items-center -space-y-[0.04rem] md:-space-y-[0.1rem]">
                             <p class="font-semibold">SHO</p>
                             <p class="font-extrabold">${playerData.shooting}</p> 
                           </div>
-                          <div class="flex flex-col items-center -space-y-[0.1rem]">
+                          <div class="flex flex-col items-center -space-y-[0.04rem] md:-space-y-[0.1rem]">
                             <p class="font-semibold">PAS</p>
                             <p class="font-extrabold">${playerData.passing}</p> 
                           </div>
-                          <div class="flex flex-col items-center -space-y-[0.1rem]">
+                          <div class="flex flex-col items-center -space-y-[0.04rem] md:-space-y-[0.1rem]">
                             <p class="font-semibold">DRI</p>
                             <p class="font-extrabold">${playerData.dribbling}</p> 
                           </div>
-                          <div class="flex flex-col items-center -space-y-[0.1rem]">
+                          <div class="flex flex-col items-center -space-y-[0.04rem] md:-space-y-[0.1rem]">
                             <p class="font-semibold">DEF</p>
                             <p class="font-extrabold">${playerData.defending}</p> 
                           </div>
-                          <div class="flex flex-col items-center -space-y-[0.1rem]">
+                          <div class="flex flex-col items-center -space-y-[0.04rem] md:-space-y-[0.1rem]">
                             <p class="font-semibold">PHY</p>
                             <p class="font-extrabold">${playerData.physical}</p> 
                           </div>

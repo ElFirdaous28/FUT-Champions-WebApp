@@ -337,3 +337,61 @@ function removePlayer(event){
         alert("you removed the player");
     }  
 }
+
+// drag and drop
+// Select all draggable player cards and the drop area
+// Select all player cards and drop areas
+// Select all player cards and drop areas
+const dragBoxs = document.querySelectorAll(".player_card");
+const dropAreas = document.querySelectorAll(".cart");
+
+// Make the player cards draggable
+dragBoxs.forEach(dragBox => {
+  dragBox.setAttribute("draggable", true);
+
+  // Add dragstart event
+  dragBox.addEventListener("dragstart", function(e) {
+    e.dataTransfer.setData("text", dragBox.id); // Store the ID of the dragged element
+    
+    // Create a custom drag image (you can use the card image or the entire player card)
+    const dragImage = document.createElement("img");
+    dragImage.src = dragBox.querySelector("img").src; // Get the image source from inside the player card
+    dragImage.style.width = "100px"; // Optional: set a custom width for the drag image
+    dragImage.style.height = "100px"; // Optional: set a custom height for the drag image
+    
+    e.dataTransfer.setDragImage(dragImage, 0, 0); // Set custom drag image
+    dragBox.classList.add("opacity-50"); // Optional: change appearance of the dragged element
+  });
+
+  // Add dragend event
+  dragBox.addEventListener("dragend", function() {
+    dragBox.classList.remove("opacity-50"); // Reset the appearance
+  });
+});
+
+// Add event listeners to each drop area
+dropAreas.forEach(dropArea => {
+  // Prevent the default behavior to allow dropping
+  dropArea.addEventListener("dragover", function(e) {
+    e.preventDefault();
+    dropArea.classList.add("bg-gray-200"); // Optional: change appearance of the drop area
+  });
+
+  // Remove the background color after dragover
+  dropArea.addEventListener("dragleave", function() {
+    dropArea.classList.remove("bg-gray-200");
+  });
+
+  // Handle the drop event
+  dropArea.addEventListener("drop", function(e) {
+    e.preventDefault();
+    const draggedId = e.dataTransfer.getData("text"); // Get the ID of the dragged element
+    const draggedElement = document.getElementById(draggedId);
+
+    // Append the dragged element to the drop area
+    dropArea.appendChild(draggedElement);
+
+    // Reset the background color
+    dropArea.classList.remove("bg-gray-200");
+  });
+});

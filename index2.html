@@ -16,7 +16,7 @@
         <button onclick="showAddPlayerModel()" class="px-3 py-2 bg-[#2a4b3b] text-[#eee] border-2 border-[#191919] rounded-lg focus:outline-none hover:bg-[#191919] hover:border-[#2a4b3b]">Add Player</button>
     </header>
     <!--  -->
-    <h1 class="text-[#eee] ml-[4%]">Create nwe squad or modify an old one by writting its subtitle</h1>
+    <h1 class="text-[#eee] ml-[4%]">Create new squad or modify an old one by writting its subtitle</h1>
     <div class="text-[#eee] py-10 flex flex-col lg:flex-row md:flex-row items-center md:items-start gap-y-10 lg:justify-around md:justify-around">
         <div class="w-11/12 lg:w-1/5 md:w-1/5 flex md:flex-col md:items-start items-center">
           <label for="formation_select" class="w-1/4 font-semibold mr-2">Formation</label>
@@ -32,16 +32,16 @@
     
         <div class="w-11/12 lg:w-1/5 md:w-1/5 flex md:flex-col md:items-start items-center">
           <label for="squad_subtitle" class="w-1/4 font-semibold mr-2">Subtitle</label>
-          <input onchange="showPlayersOnCampo()" class="w-full bg-[#191919] border-2 border-[#2a4b3b] py-2 pl-5 rounded-lg placeholder-gray-500" type="text" name="" id="squad_subtitle" placeholder="Subtitle of squad">
+          <input onchange="showPlayersOnCampo()" value="x" class="w-full bg-[#191919] border-2 border-[#2a4b3b] py-2 pl-5 rounded-lg placeholder-gray-500" type="text" name="" id="squad_subtitle" placeholder="Subtitle of squad">
         </div>
     
         <div>
           <button onclick="SaveSquad()" class="border-2 border-[#2a4b3b] py-2 px-3 rounded-lg hover:bg-[#2a4b3b] mt-5">Save squad</button>
         </div>
     </div>
-    <main class="flex flex-col lg:flex-row md:flex-row justify-around items-start">
+    <main class="flex flex-col lg:flex-row md:flex-row justify-around items-center md:items-start">
         <!-- campo container -->
-        <div class="campo_container w-full lg:w-[60%] md:w-[55%] pt-14 lg:pt-28 md:pt-14">
+        <div class="campo_container w-full lg:w-[60%] md:w-[60%] pt-10 lg:pt-40 md:pt-36">
             <div id="campo w-full" class="relative campo">
                 <div class="corner">
                   <div class="corner1"></div>
@@ -55,7 +55,7 @@
 
                 <!-- carts -->
                 <div id="campo_carts" class="absolute inset-0 w-full h-full z-10 -rotate-90">
-                    <div id="LW" data-position="LW" data-player-id=""  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%] group">
+                    <div id="LW" data-position="LW" data-player-id=""  class="cart text-[0.16rem] lg:text-[0.4rem] md:text-[0.2rem] absolute w-[12%] -translate-x-1/2 translate-y-[-100%] group">
                         <img src="src/assets/img/badge_gold.webp" alt="">
                         <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
@@ -64,7 +64,7 @@
                         </button>
                     <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">LW</div>
                     </div>
-                    <div id="ST" data-position="ST" data-player-id="" class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%] group">
+                    <div id="ST" data-position="ST" data-player-id="" class="cart text-[0.16rem] lg:text-[0.4rem] md:text-[0.2rem] absolute w-[12%] -translate-x-1/2 translate-y-[-100%] group">
                         <img src="src/assets/img/badge_gold.webp" alt="">
                         <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
@@ -73,7 +73,7 @@
                         </button>
                     <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">ST</div>
                     </div>
-                    <div id="RW" data-position="RW" data-player-id=""  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%] group">
+                    <div id="RW" data-position="RW" data-player-id=""  class="cart text-[0.16rem] lg:text-[0.4rem] md:text-[0.2rem] absolute w-[12%] -translate-x-1/2 translate-y-[-100%] group">
                         <img src="src/assets/img/badge_gold.webp" alt="">
                         <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
@@ -82,7 +82,7 @@
                         </button>
                     <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">ST</div>
                     </div>
-                    <div id="CM1" data-position="CM" data-player-id=""  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%] group">
+                    <div id="CM1" data-position="CM" data-player-id=""  class="cart text-[0.16rem] lg:text-[0.4rem] md:text-[0.2rem] absolute w-[12%] -translate-x-1/2 translate-y-[-100%] group">
                         <img src="src/assets/img/badge_gold.webp" alt="">
                         <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
@@ -91,7 +91,7 @@
                         </button>
                     <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">CM</div>
                     </div>
-                    <div id="CM3" data-position="CM" data-player-id=""  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%] group">
+                    <div id="CM3" data-position="CM" data-player-id=""  class="cart text-[0.16rem] lg:text-[0.4rem] md:text-[0.2rem] absolute w-[12%] -translate-x-1/2 translate-y-[-100%] group">
                         <img src="src/assets/img/badge_gold.webp" alt="">
                         <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
@@ -100,7 +100,7 @@
                         </button>
                     <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">CM</div>
                     </div>
-                    <div id="CM2" data-position="CM" data-player-id=""  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%] group">
+                    <div id="CM2" data-position="CM" data-player-id=""  class="cart text-[0.16rem] lg:text-[0.4rem] md:text-[0.2rem] absolute w-[12%] -translate-x-1/2 translate-y-[-100%] group">
                         <img src="src/assets/img/badge_gold.webp" alt="">
                         <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
@@ -109,7 +109,7 @@
                         </button>
                     <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">CM</div>
                     </div>
-                    <div id="LB" data-position="LB" data-player-id=""  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%] group">
+                    <div id="LB" data-position="LB" data-player-id=""  class="cart text-[0.16rem] lg:text-[0.4rem] md:text-[0.2rem] absolute w-[12%] -translate-x-1/2 translate-y-[-100%] group">
                         <img src="src/assets/img/badge_gold.webp" alt="">
                         <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
@@ -118,7 +118,7 @@
                         </button>
                     <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">LB</div>
                     </div>
-                    <div id="CB1" data-position="CB" data-player-id=""  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%] group">
+                    <div id="CB1" data-position="CB" data-player-id=""  class="cart text-[0.16rem] lg:text-[0.4rem] md:text-[0.2rem] absolute w-[12%] -translate-x-1/2 translate-y-[-100%] group">
                         <img src="src/assets/img/badge_gold.webp" alt="">
                         <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
@@ -127,7 +127,7 @@
                         </button>
                     <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">CB</div>
                     </div>
-                    <div id="CB2" data-position="CB" data-player-id=""  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%] group">
+                    <div id="CB2" data-position="CB" data-player-id=""  class="cart text-[0.16rem] lg:text-[0.4rem] md:text-[0.2rem] absolute w-[12%] -translate-x-1/2 translate-y-[-100%] group">
                         <img src="src/assets/img/badge_gold.webp" alt="">
                         <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
@@ -136,7 +136,7 @@
                         </button>
                     <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">CB</div>
                     </div>
-                    <div id="RB" data-position="RB" data-player-id=""  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%] group">
+                    <div id="RB" data-position="RB" data-player-id=""  class="cart text-[0.16rem] lg:text-[0.4rem] md:text-[0.2rem] absolute w-[12%] -translate-x-1/2 translate-y-[-100%] group">
                         <img src="src/assets/img/badge_gold.webp" alt="">
                         <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
@@ -145,7 +145,7 @@
                         </button>
                     <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">RB</div>
                     </div>
-                    <div id="GK" data-position="GK" data-player-id=""  class="cart player_card absolute w-[10%] -translate-x-1/2 translate-y-[-100%] group group">
+                    <div id="GK" data-position="GK" data-player-id=""  class="cart text-[0.16rem] lg:text-[0.4rem] md:text-[0.2rem] absolute w-[12%] -translate-x-1/2 translate-y-[-100%] group group">
                         <img src="src/assets/img/badge_gold.webp" alt="">
                         <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
