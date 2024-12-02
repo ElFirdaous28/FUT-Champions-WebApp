@@ -1,6 +1,7 @@
 let localStoragePlayers = JSON.parse(localStorage.getItem("players")) || [];
 let squads = JSON.parse(localStorage.getItem("squads")) || [];
 let clickedPosition;
+let addTo="";
 
 function changeFormation(e) {
     const formation = e.target.value;
@@ -56,7 +57,7 @@ function SaveSquad() {
                     CM3: "",
                     LW: "",
                     ST: "",
-                    RW: ""
+                    RW: "player-0"
                 },
                 substitutesPlayers: {
                     GK: [],
@@ -79,17 +80,17 @@ function SaveSquad() {
                 title,
                 subtitle,
                 principalePlayers: {
-                    GK: [],
-                    LB: [],
-                    CB1: [],
-                    CB2: [],
-                    RB: [],
-                    LM: [],
-                    CM1: [],
-                    CM2: [],
-                    RM: [],
-                    ST1: [],
-                    ST2: []
+                    GK: "",
+                    LB: "",
+                    CB1: "",
+                    CB2: "",
+                    RB: "",
+                    LM: "",
+                    CM1: "",
+                    CM2: "",
+                    RM: "",
+                    ST1: "",
+                    ST2: ""
                 },
                 substitutesPlayers: {
                     GK: [],
@@ -107,6 +108,8 @@ function SaveSquad() {
             };
         }
         // check if subtitle does not existe
+        console.log(subtitle);
+        
         const existingSquad = squads.find(squad => squad.subtitle === newSquad.subtitle);    
         if (existingSquad) {
             alert("A squad with this subtitle already exists\nmodify current squad or creat a new one!!");
@@ -122,19 +125,22 @@ function SaveSquad() {
 function addPlayerToSquad(e){    
     const choosePlayerModal = document.getElementById("choose_player_modal");
     const subtitleInput = document.getElementById("squad_subtitle");
+
+    console.log("called");
     
     if(inputNotEmpty(subtitleInput,"Subtitle field is requierd")){
         const currentSquadIndex = squads.findIndex(sq=>sq.subtitle===subtitleInput.value);
         
-        // add to priciple        
-        if(e.target.closest(".player_item").parentElement.id==="add_to_principale"){
-            const clickedPlayerId=e.target.closest(".player_item").getAttribute('data-player-id'); 
-            squads[currentSquadIndex].principalePlayers[clickedPosition]=clickedPlayerId;                
+        // add to priciple             
+        if(addTo==="add_to_principale"){
+            const clickedPlayerId=e.target.closest(".player_item").parentElement.getAttribute('data-player-id');            
+            squads[currentSquadIndex].principalePlayers[clickedPosition]=clickedPlayerId;                            
             localStorage.setItem("squads", JSON.stringify(squads));
-            console.log("player added");              
+            alert("player added");
+            choosePlayerModal.classList.add("hidden");
         }
         // add to substitues
-        if(e.target.closest(".player_item").parentElement.id==="add_to_substitues"){
+        if(addTo==="add_to_substitues"){
             const clickedPlayerId=e.target.closest(".player_item").getAttribute('data-player-id');
             console.log(clickedPosition); 
             if(!squads[currentSquadIndex].substitutesPlayers[clickedPosition].find(id=>id===clickedPlayerId)&& !Object.values(squads[currentSquadIndex].principalePlayers).includes(clickedPlayerId)){
@@ -158,6 +164,8 @@ function removeFromSquad(e){
     if(inputNotEmpty(subtitleInput,"Subtitle field is requierd")){
         const currentSquadIndex = squads.findIndex(sq=>sq.subtitle===subtitleInput.value);
         const playerId = e.target.parentElement.parentElement.getAttribute("data-player-id");
+        console.log(playerId);
+        
         
         // Remove from principalePlayers if player exists
         const principalePlayers = squads[currentSquadIndex].principalePlayers;
@@ -188,10 +196,10 @@ function changePlayerRole(e) {
     if (inputNotEmpty(subtitleInput, "Subtitle field is required")){
         const currentSquadIndex = squads.findIndex(sq => sq.subtitle === subtitleInput.value);
         const playerId = e.target.parentElement.parentElement.getAttribute("data-player-id");
-        const playerPosition = e.target.parentElement.parentElement.id;
-        console.log(e.target.parentElement.parentElement);
+        const playerPosition = e.target.closest(".cart").id;
         
-        console.log(playerId,playerPosition);
+        console.log(playerPosition);
+        
         console.log(squads[currentSquadIndex].principalePlayers[playerPosition]);
         
         if (squads[currentSquadIndex].principalePlayers[playerPosition]===playerId) {
@@ -274,8 +282,8 @@ function generatePlayerCard(player,role) {
             <div class="player_image w-2/3 absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 <img src="${player.photo}" alt="${player.name}">
             </div>
-            <div class="w-4/5 flex flex-col items-center absolute top-[62%] lg:top-[62%] md:top-[62%] left-[10%]">
-                <p class="text-[0.5rem] lg:text-xs md:text-[0.4rem] font-bold">${player.name}</p>
+            <div class="w-4/5 flex flex-col items-center absolute top-[62%] lg:top-[63%] md:top-[62%] left-[10%]">
+                <p class="text-[0.5rem] lg:text-[0.6rem] md:text-[0.4rem] font-bold">${player.name}</p>
                 ${statisticsHTML}
                 <div class="palyer_statistics w-full flex flex-row justify-center gap-2">
                     <img src="${player.flag}" width="10%" alt="${player.nationality}">
@@ -319,18 +327,26 @@ function choosePlayerModal(e){
         const playersContainer = document.getElementById("players_container");
         
         choosePlayerModal.classList.remove("hidden");
+        
         clickedPosition=clickedPosition=e.target.closest(".cart").id;
                 
+        console.log("dataPosition",e.target.closest(".cart").getAttribute("data-position"));
+        
+        const PlayerPosition = e.target.tagName === "I" ? e.target.closest(".cart").getAttribute("data-position") : e.target.closest("button").parentElement.getAttribute("data-position");
 
-        let PlayerPosition = e.target.tagName === "I" ? e.target.parentElement.parentElement.getAttribute("data-position") : e.target.closest("button").parentElement.getAttribute("data-position");
-        playersContainer.id= e.target.tagName === "I" ? "add_to_substitues" : "add_to_principale";
+        console.log(e.target.tagName);
+        
+        addTo = e.target.tagName === "I" ? "add_to_substitues" : "add_to_principale";
+        console.log(e.target.closest(".cart").getAttribute("data-position"));
+                
         playersContainer.innerHTML="";
+        
         
         players.forEach(player => {
             if(player.position.includes(PlayerPosition)){            
                 const positions = player.position.join(' / ');            
-                playersContainer.innerHTML+=`<div data-player-id=${player.id} data-player-position =${player.position} class="player_item flex items-center justify-between p-2 bg-neutral-700 rounded-lg cursor-pointer">
-                                                    <div onclick="addPlayerToSquad(event)" class="flex items-center">
+                playersContainer.innerHTML+=`<div data-player-id=${player.id} data-player-position =${player.position} class="flex items-center justify-between p-2 bg-neutral-700 rounded-lg cursor-pointer">
+                                                    <div onclick="addPlayerToSquad(event)" class="player_item flex items-center">
                                                         <!-- Player Image -->
                                                         <img alt="Image of player" class="w-16 h-16 rounded-full" height="40" src="${player.photo || 'https://via.placeholder.com/150?text=No+Image'}" width="40"/>
 
@@ -381,6 +397,95 @@ document.getElementById("choose_player_modal").addEventListener("click", (e) => 
         closeModal("choose_player_modal");
     }
 });
+
+function generateCampoCard(playerData) {
+    // Generate statistics based on player type (GK or field player)
+    let statisticsHTML;
+    if (playerData.position.includes("GK")) {
+        statisticsHTML = `
+            <div class="player_statistics w-full flex flex-row justify-between">
+                <div class="flex flex-col items-center -space-y-[0.04rem] md:-space-y-[0.1rem]">
+                    <p class="font-semibold">DIV</p>
+                    <p class="font-extrabold">${playerData.diving}</p>
+                </div>
+                <div class="flex flex-col items-center -space-y-[0.04rem] md:-space-y-[0.1rem]">
+                    <p class="font-semibold">HAN</p>
+                    <p class="font-extrabold">${playerData.handling}</p>
+                </div>
+                <div class="flex flex-col items-center -space-y-[0.04rem] md:-space-y-[0.1rem]">
+                    <p class="font-semibold">KIC</p>
+                    <p class="font-extrabold">${playerData.kicking}</p>
+                </div>
+                <div class="flex flex-col items-center -space-y-[0.04rem] md:-space-y-[0.1rem]">
+                    <p class="font-semibold">REF</p>
+                    <p class="font-extrabold">${playerData.reflexes}</p>
+                </div>
+                <div class="flex flex-col items-center -space-y-[0.04rem] md:-space-y-[0.1rem]">
+                    <p class="font-semibold">SPD</p>
+                    <p class="font-extrabold">${playerData.speed}</p>
+                </div>
+                <div class="flex flex-col items-center -space-y-[0.04rem] md:-space-y-[0.1rem]">
+                    <p class="font-semibold">POS</p>
+                    <p class="font-extrabold">${playerData.positioning}</p>
+                </div>
+            </div>`;
+    } else {
+        statisticsHTML = `
+            <div class="player_statistics w-full flex flex-row justify-between">
+                <div class="flex flex-col items-center -space-y-[0.04rem] md:-space-y-[0.1rem]">
+                    <p class="font-semibold">PAC</p>
+                    <p class="font-extrabold">${playerData.pace}</p>
+                </div>
+                <div class="flex flex-col items-center -space-y-[0.04rem] md:-space-y-[0.1rem]">
+                    <p class="font-semibold">SHO</p>
+                    <p class="font-extrabold">${playerData.shooting}</p>
+                </div>
+                <div class="flex flex-col items-center -space-y-[0.04rem] md:-space-y-[0.1rem]">
+                    <p class="font-semibold">PAS</p>
+                    <p class="font-extrabold">${playerData.passing}</p>
+                </div>
+                <div class="flex flex-col items-center -space-y-[0.04rem] md:-space-y-[0.1rem]">
+                    <p class="font-semibold">DRI</p>
+                    <p class="font-extrabold">${playerData.dribbling}</p>
+                </div>
+                <div class="flex flex-col items-center -space-y-[0.04rem] md:-space-y-[0.1rem]">
+                    <p class="font-semibold">DEF</p>
+                    <p class="font-extrabold">${playerData.defending}</p>
+                </div>
+                <div class="flex flex-col items-center -space-y-[0.04rem] md:-space-y-[0.1rem]">
+                    <p class="font-semibold">PHY</p>
+                    <p class="font-extrabold">${playerData.physical}</p>
+                </div>
+            </div>`;
+    }
+
+    // Return the complete card HTML
+    return `
+        <div class="card" data-player-id="${playerData.id}">
+            <div class="text-[#eee] translate-y-5 flex justify-around invisible group-hover:visible text-xs">
+                <i class="fas fa-plus cursor-pointer" onclick="choosePlayerModal(event)" title="add substitute at position"></i>
+                <i onclick="changePlayerRole(event)" class="fas fa-exchange-alt cursor-pointer" title="make substitute"></i>
+                <i onclick="removeFromSquad(event)" class="fas fa-times cursor-pointer" title="remove from squad"></i>
+            </div>
+            <img src="src/assets/img/badge_gold.webp" alt="">
+            <div class="player_positoin flex flex-col absolute top-[30%] left-[12%]">
+                <p class="font-bold">${playerData.rating}</p>
+                <p>${playerData.position[0]}</p>
+            </div>
+            <div class="player_image w-2/3 absolute top-[38%] lg:top-[42%] md:top-[38%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <img src="${playerData.photo}" alt="">
+            </div>
+            <div class="w-4/5 flex flex-col items-center absolute top-[58%] md:top-[62%] lg:top-[64%] left-[10%]">
+                <p class="font-bold">${playerData.name}</p>
+                ${statisticsHTML}
+                <div class="player_statistics w-full flex flex-row justify-center gap-2">
+                    <img src="${playerData.flag}" width="8%" alt="">
+                    <img src="${playerData.logo}" width="8%" alt="">
+                </div>
+            </div>
+            <div class="position_abr text-[#eee] text-center -mt-2 font-medium text-xs">${playerData.position[0]}</div>
+        </div>`;
+}
 
 function showPlayersOnCampo() {
     const playerCart = document.querySelectorAll(".cart");
@@ -521,4 +626,7 @@ function showPlayersOnCampo() {
     }
 }
 
+
+
 showPlayersOnCampo()
+

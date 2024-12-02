@@ -255,6 +255,8 @@ document.getElementById("add_player_form").addEventListener("submit", function (
         }
 
         const playerId = document.getElementById("save_player_btn").getAttribute("data-player-id");
+        console.log(document.getElementById("save_player_btn"));
+        
 
         // Create a new player if playerId is empty
         if (playerId === "") {
@@ -283,9 +285,8 @@ document.getElementById("add_player_form").addEventListener("submit", function (
 
 // function to show  modification modal  of player
 function modifyPlayer(event) {
-    // Show the add_player_modal as modify modal and hide chooseuser modal
+    // Show the add_player_modal as modify modal
     document.getElementById("add_player_modal").classList.remove("hidden");
-    // document.getElementById("choose_player_modal").classList.add("hidden");
 
     const playerId = event.target.closest("button").getAttribute("data-player-id");
     

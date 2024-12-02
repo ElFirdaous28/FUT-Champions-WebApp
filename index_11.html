@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Build and manage your custom football team with dynamic formations, player stats, chemistry calculations, and more. An interactive Ultimate Team management app.">
+  <meta name="keywords" content="football team, team management, player stats, chemistry calculation, formations, ultimate team, dynamic app">
+  <meta name="author" content="FI">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/pitch.css">
+  <script src="js/tailwind.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+</head>
+<body class="bg-[#191919]">
+  <!-- header -->
+  <header class="bg-[#2a4b3b] h-20 flex items-center justify-end p-10">
+    <button onclick="showAddPlayerModel()" class="p-2 text-[#eee] border-2 rounded-lg focus:outline-none hover:bg-[#191919]">Add Player</button>
+  </header>
+  <div class="text-[#eee] py-10 flex flex-col lg:flex-row md:flex-row justify-around">
+    <div>
+      <label for="formation_select" class="font-semibold mr-2">Formation</label>
+      <select onchange="changeFormation(event)" class="bg-[#191919] border-2 border-[#2a4b3b] w-56 py-2 pl-5 rounded-lg focus:outline-none" name="" id="formation_select">
+        <option class=" hover:bg-[#191919]" value="433">4-3-3</option>
+        <option value="442">4-4-2</option>
+      </select>
+    </div>
+    <div>
+      <label for="squad_title" class="font-semibold mr-2">Title</label>
+      <input class="bg-[#191919] border-2 border-[#2a4b3b] w-56 py-2 pl-5 rounded-lg placeholder-gray-500" required type="text" name="" id="squad_title" placeholder="Title of squad">
+    </div>
+
+    <div>
+      <label for="squad_subtitle" class="font-semibold mr-2">Subtitle</label>
+      <input class="bg-[#191919] border-2 border-[#2a4b3b] w-56 py-2 pl-5 rounded-lg placeholder-gray-500" required type="text" name="" id="squad_subtitle" placeholder="Subtitle of squad">
+    </div>
+
+    <div>
+      <button onclick="SaveSquad()" class="border-2 border-[#2a4b3b] py-2 px-3 rounded-lg hover:bg-[#2a4b3b]">Save squad</button>
+    </div>
+  </div>
+    <!--  -->
+  <!-- items is the reason!!! -->
+  <div class="flex flex-col gap-y-20  lg:flex-row md:flex-row items-center justify-start ">
+    <!-- campo container -->
+    <div class="campo_container relative pt-20 lg:pt-32 md:pt-40 w-full lg:w-7/12 md:w-4/5" style="max-height: 1000px;">
+      <div class="campo h-full"  >
+        <div class="corner">
+          <div class="corner1"></div>
+          <div class="corner2"></div>
+        </div>
+        <div class="semi1"></div>
+        <div class="semi2"></div>
+        <div class="divisoria"></div>
+        <div class="interior"></div>
+        <div class="penalty"></div>
+      </div>
+      <!-- formation 4,3,3 by default -->
+      <!-- gk -->
+      <div id="GK" data-position="GK" data-player-id="player-1" class="player_card group relative text-black w-[32%] lg:w-[16%] scale-[0.3] lg:scale-[0.7]  translate-y-[-40%] left-[36%] lg:left-[42%]">
+        <div class="text-[#eee] translate-y-5 flex justify-around invisible group-hover:visible">
+          <i class="fas fa-plus cursor-pointer" onclick="choosePlayerModal(event)" title="add substitute at position"></i>
+          <i onclick="changePlayerRole(event)" class="fas fa-exchange-alt cursor-pointer" title="make substitute"></i>
+          <i onclick="removeFromSquad(event)" class="fas fa-times cursor-pointer" title="remove from squad"></i>
+        </div>
+        <img src="src/assets/img/badge_gold.webp" alt="">
+        <!-- position and number -->
+        <div class="player_positoin flex flex-col absolute top-[25%] left-[15%]">
+          <p class="text-[10px] lg:text-[10px] font-bold">90</p>
+          <p class="text-xs lg:text-xs">CF</p> 
+        </div>
+        <!-- image -->
+        <div class="player_image w-2/3 absolute top-[44%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <img src="https://cdn.sofifa.net/players/158/023/25_120.png" alt="">
+        </div>
+        <!-- name and more -->
+        <div class="w-4/5 flex flex-col items-center absolute top-[64%] left-[10%]">
+          <p class="text-xs lg:text-xs md:text-xs font-bold">Messi</p>
+          <!-- player statistics -->
+          <div class="palyer_statistics w-full flex flex-row justify-around text-[6px] lg:text-[0.5em] md:text-[0.5em]">
+            <div class="flex flex-col items-center">
+              <p class="font-semibold">PAC</p>
+              <p class="font-extrabold">80</p> 
+            </div>
+            <div class="flex flex-col items-center">
+              <p class="font-semibold">SHO</p>
+              <p class="font-extrabold">87</p> 
+            </div>
+            <div class="flex flex-col items-center">
+              <p class="font-semibold">PAS</p>
+              <p class="font-extrabold">90</p> 
+            </div>
+            <div class="flex flex-col items-center">
+              <p class="font-semibold">DRI</p>
+              <p class="font-extrabold">94</p> 
+            </div>
+            <div class="flex flex-col items-center">
+              <p class="font-semibold">DEF</p>
+              <p class="font-extrabold">33</p> 
+            </div>
+            <div class="flex flex-col items-center">
+              <p class="font-semibold">PHY</p>
+              <p class="font-extrabold">64</p> 
+            </div>
+          </div>
+          <!-- flags -->
+          <div class="palyer_statistics w-full flex flex-row justify-center gap-2">
+            <img src="https://cdn.sofifa.net/flags/pt.png" width="8%" alt="">
+            <img src="https://cdn.sofifa.net/meta/team/271/30.png" width="8%" alt="">
+            <img src="https://cdn.sofifa.net/meta/team/2506/120.png" width="8%" alt="">
+          </div>
+        </div>
+        <div class="position_abr text-[#eee] text-center mt-[-20px] font-bold">GK</div>
+      </div>
+      <!-- LB -->
+      <div id="LB" data-position="LB" class="player_card relative text-black  lg:w-[16%] lg:scale-[0.7] translate-y-[-210%] left-[15%]">
+        <img src="src/assets/img/badge_gold.webp" alt="">
+        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
+            <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
+          </svg>
+        </button>
+        <div class="position_abr text-[#eee] text-center mt-[-20px] font-bold">LB</div>
+      </div>
+      <!-- CB1 -->
+      <div id="CB" data-position="CB1" class="player_card relative text-black  lg:w-[16%] lg:scale-[0.7] translate-y-[-310%] left-[30%]">
+        <img src="src/assets/img/badge_gold.webp" alt="">
+        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
+            <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
+          </svg>
+        </button>
+        <div class="position_abr text-[#eee] text-center mt-[-20px] font-bold">CB</div>
+      </div>
+      <!-- CB2 -->
+      <div id="CB" data-position="CB2" class="player_card relative text-black  lg:w-[16%] lg:scale-[0.7] translate-y-[-410%] left-[55%]">
+        <img src="src/assets/img/badge_gold.webp" alt="">
+        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
+            <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
+          </svg>
+        </button>
+        <div class="position_abr text-[#eee] text-center mt-[-20px] font-bold">CB</div>
+      </div>
+      <!-- RB -->
+      <div id="RB" data-position="RB" class="player_card relative text-black  lg:w-[16%] lg:scale-[0.7] translate-y-[-510%] left-[70%]">
+        <img src="src/assets/img/badge_gold.webp" alt="">
+        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
+            <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
+          </svg>
+        </button>
+        <div class="position_abr text-[#eee] text-center mt-[-20px] font-bold">RB</div>
+      </div>
+      <!-- CM1 -->
+      <div id="CM1" data-position="CM1" class="player_card relative text-black  lg:w-[16%] lg:scale-[0.7] translate-y-[-710%] left-[30%]">
+        <img src="src/assets/img/badge_gold.webp" alt="">
+        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
+            <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
+          </svg>
+        </button>
+        <div class="position_abr text-[#eee] text-center mt-[-20px] font-bold">CM</div>
+      </div>
+      <!-- CM2 -->
+      <div id="CM2" data-position="CM2" class="player_card relative text-black  lg:w-[16%] lg:scale-[0.7] translate-y-[-810%] left-[55%]">
+        <img src="src/assets/img/badge_gold.webp" alt="">
+        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
+            <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
+          </svg>
+        </button>
+        <div class="position_abr text-[#eee] text-center mt-[-20px] font-bold">CM</div>
+      </div>
+      <!-- CM3 -->
+      <div id="CM3" data-position="CM3" class="player_card relative text-black  lg:w-[16%] lg:scale-[0.7] translate-y-[-970%] left-[42%]">
+        <img src="src/assets/img/badge_gold.webp" alt="">
+        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
+            <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
+          </svg>
+        </button>
+        <div class="position_abr text-[#eee] text-center mt-[-20px] font-bold">CM</div>
+      </div>
+      <!-- LW -->
+      <div id="LW" data-position="LW" class="player_card relative text-black  lg:w-[16%] lg:scale-[0.7] translate-y-[-1150%] left-[15%]">
+        <img src="src/assets/img/badge_gold.webp" alt="">
+        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
+            <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
+          </svg>
+        </button>
+        <div class="position_abr text-[#eee] text-center mt-[-20px] font-bold">LW</div>
+      </div>
+      <!-- ST -->
+      <div id="ST" data-position="ST" class="player_card relative text-black  lg:w-[16%] lg:scale-[0.7] translate-y-[-1250%] left-[42%]">
+        <img src="src/assets/img/badge_gold.webp" alt="">
+        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
+            <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
+          </svg>
+        </button>
+        <div class="position_abr text-[#eee] text-center mt-[-20px] font-bold">ST</div>
+      </div>
+      <!-- RW -->
+      <div id="RW" data-position="RW" class="player_card relative text-black  lg:w-[16%] lg:scale-[0.7] translate-y-[-1350%] left-[70%]">
+        <img src="src/assets/img/badge_gold.webp" alt="">
+        <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
+            <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" style="fill: #333333;"></path>
+          </svg>
+        </button>
+        <div class="position_abr text-[#eee] text-center mt-[-20px] font-bold">RW</div>
+      </div>
+    </div>
+    
+    <!-- players container -->
+    <div class="border-2 border-[#2a4b3b] rounded-md m-auto w-11/12 lg:w-1/3 md:w-1/3 text-[#eee] flex flex-col items-center">
+      <select id="players_container_select" onchange="showPlayers()" name="" id="" class="bg-[#191919] border-2 border-[#2a4b3b] w-56 py-2 pl-5 rounded-lg focus:outline-none my-4">
+        <option value="all_players">All Players</option>
+        <option value="squad_substitutes">Squad Substitutes</option>
+      </select>
+       <div id="aside_players_container" class="cards grid grid-cols-3 gap-4 max-h-screen overflow-y-auto scrollbar-hidden">
+        <!-- players cards will appear here -->
+       </div>
+    </div>
+  </div>
+
+  <!-- choose player Modal -->
+  <div id="choose_player_modal" class="fixed inset-0 bg-neutral-800 bg-opacity-50 flex items-center justify-center hidden">
+    <div id="choose_modal_content" class="w-1/2 h-3/4 overflow-y-auto scrollbar-hidden mx-auto mt-10 p-4 bg-neutral-800 rounded-lg shadow-lg">
+      <div id="close_choose_player_modal" class="flex justify-end items-center mb-4">
+        <i class="fas fa-times text-gray-400 cursor-pointer text-xl"></i>
+      </div>
+      <div class="mb-4">
+        <input class="w-full p-4 bg-neutral-700 text-white rounded-lg focus:outline-none" placeholder="search player" type="text">
+      </div>
+      <div id="players_container" class="flex flex-col gap-y-4">
+         
+      </div>
+    </div>
+  </div>
+
+  <!-- add player Modal -->
+  <div id="add_player_modal" class="fixed inset-0 bg-neutral-800 bg-opacity-50 flex items-center justify-center hidden">
+    <div id="add_modal_content" class="w-1/2 h-5/6 overflow-y-auto scrollbar-hidden mx-auto mt-10 p-4  bg-neutral-800 rounded-lg shadow-lg">
+      <div id="close_add_player_modal" class="flex justify-end items-center mb-4">
+        <i class="fas fa-times text-gray-400 cursor-pointer text-xl"></i>
+      </div>
+      <form id="add_player_form" class="text-white flex flex-col gap-y-10">
+        <!-- Name and Photo -->
+        <div class="flex justify-between items-end">
+          <div class="flex flex-col w-2/3">
+            <label for="player_name" class="mb-5">Player's Full Name</label>
+            <input id="player_name" name="player_name" type="text" required placeholder="Enter Full Name" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <!-- Photo -->
+          <div class="w-1/3 flex flex-col items-center">
+            <label for="playerPhotoInput" class="text-white rounded-lg cursor-pointer">Choose Photo</label>
+            <input type="file" id="playerPhotoInput" name="player_photo" accept="image/*" class="hidden" />
+            <img id="playerPhotoPreview" class="mt-4 w-16" src="src/assets/img/user.png" alt="Player Photo Preview" />
+          </div>
+        </div>
+        
+        <!-- Nationality -->
+        <div>
+          <h1>Nationality</h1>
+          <select id="nationality_select" name="nationality" class="p-2 bg-neutral-700 rounded-lg focus:outline-none w-2/3">
+            <option value=""></option>
+          </select>
+        </div>
+        
+        <!-- Club -->
+        <div>
+          <h1>Club</h1>
+          <select id="club_select" name="club" class="p-2 bg-neutral-700 rounded-lg focus:outline-none w-2/3">
+            <option value=""></option>
+          </select>
+        </div>
+        
+        <!-- Position -->
+        <div class="flex flex-col">
+          <label for="player_position">Player Position:</label>
+          <select id="player_position" name="position" onchange="statisticsFields()" class="p-2 bg-neutral-700 rounded-lg focus:outline-none w-2/3">
+            <option value=""></option>
+            <option value="RW">Right Wing (RW)</option>
+            <option value="ST">Striker (ST)</option>
+            <option value="CM">Central Midfielder (CM)</option>
+            <option value="CB">Center Back (CB)</option>
+            <option value="LW">Left Wing (LW)</option>
+            <option value="GK">Goalkeeper (GK)</option>
+            <option value="CDM">Central Defensive Midfielder (CDM)</option>
+            <option value="LB">Left Back (LB)</option>
+            <option value="RB">Right Back (RB)</option>
+          </select>
+        </div>        
+        <p id="numberInputError" class="text-red-500"></p>
+        <!-- Statistics -->
+        <div class="statistics grid grid-cols-2 gap-x-16 gap-y-2">
+          <!-- General Statistics -->
+          <div class="flex flex-col">
+            <label for="rating">Rating:</label>
+            <input id="rating" name="rating" type="number" value="0" min="0" max="100" required class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="other_positions flex flex-col">
+            <label for="pace">Pace:</label>
+            <input id="pace" name="pace" type="number" value="0" min="0" max="100" required class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="other_positions flex flex-col">
+            <label for="shooting">Shooting:</label>
+            <input id="shooting" name="shooting" type="number" value="0" min="0" max="100" required class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="other_positions flex flex-col">
+            <label for="passing">Passing:</label>
+            <input id="passing" name="passing" type="number" value="0" min="0" max="100" required class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="other_positions flex flex-col">
+            <label for="dribbling">Dribbling:</label>
+            <input id="dribbling" name="dribbling" type="number" value="0" min="0" max="100" required class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="other_positions flex flex-col">
+            <label for="defending">Defending:</label>
+            <input id="defending" name="defending" type="number" value="0" min="0" max="100" required class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="other_positions flex flex-col ">
+            <label for="physical">Physical:</label>
+            <input id="physical" name="physical" type="number" value="0" min="0" max="100" required class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          
+          <!-- GK Statistics -->
+          <div class="gk_position hidden flex flex-col">
+            <label for="diving">Diving:</label>
+            <input id="diving" name="diving" type="number" value="0" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="gk_position hidden flex flex-col">
+            <label for="handling">Handling:</label>
+            <input id="handling" name="handling" type="number" value="0" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="gk_position hidden flex flex-col">
+            <label for="kicking">Kicking:</label>
+            <input id="kicking" name="kicking" type="number" value="0" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="gk_position hidden flex flex-col">
+            <label for="reflexes">Reflexes:</label>
+            <input id="reflexes" name="reflexes" type="number" value="0" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="gk_position hidden flex flex-col">
+            <label for="speed">Speed:</label>
+            <input id="speed" name="speed" type="number" value="0" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+          <div class="gk_position hidden flex flex-col ">
+            <label for="positioning" >Positioning:</label>
+            <input id="positioning" name="positioning" type="number" value="0" min="0" max="100" class="p-2 bg-neutral-700 rounded-lg focus:outline-none">
+          </div>
+        </div>
+        
+        <!-- Submit Button -->
+        <button id="save_player_btn" data-player-id="" name="save_player" type="submit" class="border-2 border-[#2a4b3b] rounded-lg w-1/4 py-2 self-end hover:bg-[#2a4b3b]">Save</button>
+      </form>
+          
+    </div>
+  </div>
+
+  <!-- scripts -->
+   <script src="js/script.js"></script>
+   <script src="js/squads.js"></script>
+   <script>
+    // Handle image preview
+    document.getElementById("playerPhotoInput").addEventListener("change", function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const imgElement = document.getElementById("playerPhotoPreview");
+          imgElement.src = e.target.result;
+          imgElement.classList.remove("hidden"); // Show image preview
+        };
+        reader.readAsDataURL(file); // Read the file as a data URL
+      }
+    });
+  </script>  
+</body>
+</html>
