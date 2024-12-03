@@ -260,7 +260,7 @@ function showPlayers() {
 function generatePlayerCard(player,role) {
     const statisticsHTML = player.position.includes('GK') 
         ? `
-            <div class="player_statistics w-full flex flex-row justify-between text-[0.3rem] lg:text-[0.5em] md:text-[0.08em]">
+            <div class="player_statistics w-full flex flex-row justify-between text-[0.3rem] xl:text-[0.5em] lg:text-[0.4rem] md:text-[0.08em]">
                 <div class="flex flex-col items-center -space-y-[0.1rem]"><p class="font-semibold">DIV</p><p class="font-extrabold">${player.diving}</p></div>
                 <div class="flex flex-col items-center -space-y-[0.1rem]"><p class="font-semibold">HAN</p><p class="font-extrabold">${player.handling}</p></div>
                 <div class="flex flex-col items-center -space-y-[0.1rem]"><p class="font-semibold">KIC</p><p class="font-extrabold">${player.kicking}</p></div>
@@ -270,7 +270,7 @@ function generatePlayerCard(player,role) {
             </div>
         `
         : `
-            <div class="player_statistics w-full flex flex-row justify-between text-[0.3rem] lg:text-[0.5em] md:text-[0.08em]">
+            <div class="player_statistics w-full flex flex-row justify-between text-[0.3rem] xl:text-[0.5em] lg:text-[0.4rem] md:text-[0.08em]">
                 <div class="flex flex-col items-center -space-y-[0.1rem]"><p class="font-semibold">PAC</p><p class="font-extrabold">${player.pace}</p></div>
                 <div class="flex flex-col items-center -space-y-[0.1rem]"><p class="font-semibold">SHO</p><p class="font-extrabold">${player.shooting}</p></div>
                 <div class="flex flex-col items-center -space-y-[0.1rem]"><p class="font-semibold">PAS</p><p class="font-extrabold">${player.passing}</p></div>
@@ -295,8 +295,8 @@ function generatePlayerCard(player,role) {
             <div class="player_image w-2/3 absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 <img src="${player.photo}" alt="${player.name}">
             </div>
-            <div class="w-4/5 flex flex-col items-center absolute top-[62%] lg:top-[63%] md:top-[62%] left-[10%]">
-                <p class="text-[0.5rem] lg:text-[0.6rem] md:text-[0.4rem] font-bold">${player.name}</p>
+            <div class="w-4/5 flex flex-col items-center absolute top-[63%] lg:top-[63%] md:top-[62%] left-[10%]">
+                <p class="text-[0.3rem] xl:text-[0.6rem] lg:text-[0.4rem] md:text-[0.4rem] font-bold">${player.name}</p>
                 ${statisticsHTML}
                 <div class="palyer_statistics w-full flex flex-row justify-center gap-2">
                     <img src="${player.flag}" width="10%" alt="${player.nationality}">
@@ -364,8 +364,8 @@ function choosePlayerModal(e){
                                                         <img alt="Image of player" class="w-16 h-16 rounded-full" height="40" src="${player.photo || 'https://via.placeholder.com/150?text=No+Image'}" width="40"/>
 
                                                         <!-- Player Info -->
-                                                        <div class="ml-4">
-                                                            <div class="text-white font-semibold w-52">${player.name}</div>
+                                                        <div class="md:ml-4">
+                                                            <div class="text-white font-semibold w-16 md:w-52">${player.name}</div>
                                                         </div>
                                                     </div>
 
@@ -485,10 +485,10 @@ function generateCampoCard(playerData) {
                 <p class="font-bold">${playerData.rating}</p>
                 <p>${playerData.position[0]}</p>
             </div>
-            <div class="player_image w-2/3 absolute top-[38%] lg:top-[42%] md:top-[38%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <img src="${playerData.photo}" alt="">
+            <div class="player_image w-2/3 absolute top-[44%] lg:top-[42%] md:top-[44%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <img src="${playerData.photo}" alt="${playerData.name}">
             </div>
-            <div class="w-4/5 flex flex-col items-center absolute top-[58%] md:top-[62%] lg:top-[64%] left-[10%]">
+            <div class="w-4/5 flex flex-col items-center absolute top-[64%] md:top-[64%] lg:top-[64%] left-[10%]">
                 <p class="font-bold">${playerData.name}</p>
                 ${statisticsHTML}
                 <div class="player_statistics w-full flex flex-row justify-center gap-2">
@@ -530,3 +530,4 @@ function showPlayersOnCampo() {
        }
     }
 }
+
