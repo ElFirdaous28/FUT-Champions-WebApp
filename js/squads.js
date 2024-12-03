@@ -165,9 +165,7 @@ function removeFromSquad(e){
     if(inputNotEmpty(subtitleInput,"Subtitle field is requierd")){
         const currentSquadIndex = squads.findIndex(sq=>sq.subtitle===subtitleInput.value);
         const playerId = e.target.parentElement.parentElement.getAttribute("data-player-id");
-        const playerPosition = e.target.parentElement.parentElement.getAttribute("data-position");
-        console.log(playerId);
-        
+        const playerPosition = e.target.closest(".cart").getAttribute("data-position");                
         
         // Remove from principalePlayers if player exists
         const principalePlayers = squads[currentSquadIndex].principalePlayers;
@@ -186,9 +184,7 @@ function removeFromSquad(e){
                 console.log(`Player removed from substitutes at ${position}`);
             }
         }
-        localStorage.setItem("squads", JSON.stringify(squads)); 
-        console.log(playerPosition);
-        
+        localStorage.setItem("squads", JSON.stringify(squads));         
         e.target.parentElement.parentElement.innerHTML=`<img src="src/assets/img/badge_gold.webp" alt="">
                                                         <button onclick="choosePlayerModal(event)" class=" absolute top-1/2 left-[34%]">
                                                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50%" height="50%" viewBox="0 0 50 50">
