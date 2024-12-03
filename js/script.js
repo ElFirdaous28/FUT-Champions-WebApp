@@ -1,34 +1,34 @@
-async function loadData() {
-    const response = await fetch('../data/players.json');
-    if (!response.ok) {
-        throw new Error('Network response was not ok');
-    }
-    const data = await response.json();
-    return data.players; // Make sure to return just the players array
-}
+// async function loadData() {
+//     const response = await fetch('../data/players.json');
+//     if (!response.ok) {
+//         throw new Error('Network response was not ok');
+//     }
+//     const data = await response.json();
+//     return data.players; // Make sure to return just the players array
+// }
 
-async function addIdsToPlayers(players) {
-    return players.map((player, index) => ({
-        ...player,
-        id: `player-${index + 1}`
-    }));
-}
+// async function addIdsToPlayers(players) {
+//     return players.map((player, index) => ({
+//         ...player,
+//         id: `player-${index + 1}`
+//     }));
+// }
 
-async function init() {
-    try {
-        // Fetch the players data
-        const players = await loadData(); 
-        // Add unique IDs to each player
-        const playersWithIds = await addIdsToPlayers(players);
+// async function init() {
+//     try {
+//         // Fetch the players data
+//         const players = await loadData(); 
+//         // Add unique IDs to each player
+//         const playersWithIds = await addIdsToPlayers(players);
 
-        // Save the players data with IDs to localStorage
-        localStorage.setItem('players', JSON.stringify(playersWithIds));
-    } catch (error) {
-        console.error('Error loading data:', error);
-    }
-}
+//         // Save the players data with IDs to localStorage
+//         localStorage.setItem('players', JSON.stringify(playersWithIds));
+//     } catch (error) {
+//         console.error('Error loading data:', error);
+//     }
+// }
 
-init();
+// init();
 let players = JSON.parse(localStorage.getItem("players")) || [];
  // This will now be an array
 // Extract and deduplicate countries/flags and clubs/logos
