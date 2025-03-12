@@ -107,8 +107,6 @@ function SaveSquad() {
                 }
             };
         }
-        // check if subtitle does not existe
-        console.log(subtitle);
         
         const existingSquad = squads.find(squad => squad.subtitle === newSquad.subtitle);    
         if (existingSquad) {
@@ -125,8 +123,6 @@ function SaveSquad() {
 function addPlayerToSquad(e){    
     const choosePlayerModal = document.getElementById("choose_player_modal");
     const subtitleInput = document.getElementById("squad_subtitle");
-
-    console.log("called");
     
     if(inputNotEmpty(subtitleInput,"Subtitle field is requierd")){
         const currentSquadIndex = squads.findIndex(sq=>sq.subtitle===subtitleInput.value);
@@ -142,21 +138,14 @@ function addPlayerToSquad(e){
         }
         // add to substitues
         if(addTo==="add_to_substitues"){
-            const clickedPlayerId=e.target.closest(".player_item").parentElement.getAttribute('data-player-id');
-            console.log(clickedPosition); 
-            console.log(clickedPlayerId);
-            
+            const clickedPlayerId=e.target.closest(".player_item").parentElement.getAttribute('data-player-id');            
             
             if(!squads[currentSquadIndex].substitutesPlayers[clickedPosition].find(id=>id===clickedPlayerId)&& !Object.values(squads[currentSquadIndex].principalePlayers).includes(clickedPlayerId)){
                 // !Object.valuestake object and return array of values
                 squads[currentSquadIndex].substitutesPlayers[clickedPosition].push(clickedPlayerId);
                 localStorage.setItem("squads", JSON.stringify(squads));
-                console.log();
                 
-            }  
-            else{
-                console.log("player alredy in ");   
-            }         
+            }          
         }
     }
     else{
@@ -177,7 +166,6 @@ function removeFromSquad(e){
         for (let position in principalePlayers) {
             if (principalePlayers[position] === playerId) {
                 principalePlayers[position] = ""; // Remove player from principale position
-                console.log(`Player removed from principale at ${position}`);
             }
         }
         // Remove from substitutes if player exists
@@ -186,7 +174,6 @@ function removeFromSquad(e){
             const playerIndex = substitutesPlayers[position].indexOf(playerId);
             if (playerIndex !== -1) {
                 substitutesPlayers[position].splice(playerIndex, 1);
-                console.log(`Player removed from substitutes at ${position}`);
             }
         }
         localStorage.setItem("squads", JSON.stringify(squads));         
@@ -209,18 +196,13 @@ function changePlayerRole(e) {
         const currentSquadIndex = squads.findIndex(sq => sq.subtitle === subtitleInput.value);
         const playerId = e.target.parentElement.parentElement.getAttribute("data-player-id");
         const playerPosition = e.target.closest(".cart").id;
-        
-        console.log(playerPosition);
-        
-        console.log(squads[currentSquadIndex].principalePlayers[playerPosition]);
-        
+                        
         if (squads[currentSquadIndex].principalePlayers[playerPosition]===playerId) {
             // remove from principale
             squads[currentSquadIndex].principalePlayers[playerPosition] = "";
             // Add  to substitutes
             if (!squads[currentSquadIndex].substitutesPlayers[playerPosition].includes(playerId)) {
                 squads[currentSquadIndex].substitutesPlayers[playerPosition].push(playerId);
-                console.log(e.target.parentElement);
                 
             }
             localStorage.setItem("squads", JSON.stringify(squads));
@@ -347,15 +329,10 @@ function choosePlayerModal(e){
         choosePlayerModal.classList.remove("hidden");
         
         clickedPosition=clickedPosition=e.target.closest(".cart").id;
-                
-        console.log("dataPosition",e.target.closest(".cart").getAttribute("data-position"));
-        
+                        
         const PlayerPosition = e.target.tagName === "I" ? e.target.closest(".cart").getAttribute("data-position") : e.target.closest("button").parentElement.getAttribute("data-position");
 
-        console.log(e.target.tagName);
-        
         addTo = e.target.tagName === "I" ? "add_to_substitues" : "add_to_principale";
-        console.log(e.target.closest(".cart").getAttribute("data-position"));
                 
         playersContainer.innerHTML="";
         
@@ -510,9 +487,7 @@ function showPlayersOnCampo() {
     const playerCart = document.querySelectorAll(".cart");
     const squadSubtitle = document.getElementById("squad_subtitle").value;
     if(squadSubtitle!==""){
-        const squadsRefrech=JSON.parse(localStorage.getItem("squads")) || [];
-        console.log(squadsRefrech);
-        
+        const squadsRefrech=JSON.parse(localStorage.getItem("squads")) || [];        
         
         const currentSquadIndex=squadsRefrech.findIndex(sq=>sq.subtitle===squadSubtitle);
         

@@ -30,6 +30,8 @@ async function init() {
 
 init();
 let players = JSON.parse(localStorage.getItem("players")) || [];
+console.log(players);
+
  // This will now be an array
 // Extract and deduplicate countries/flags and clubs/logos
 const deduplicate = (arr, key1, key2) =>
@@ -168,18 +170,15 @@ function numberInputVlaide(inputElement) {
 
     // Validate input value
     if (inputElement.value === "" || inputElement.value < 0 || inputElement.value > 100) {
-        console.log("not okay");
 
         // Create and insert the error message
         const pError = document.createElement("p");
         pError.textContent = "This input's value should be between 0 and 100";
         pError.classList.add("error-message", "text-red-500"); // Add a class for styling
-        console.log(inputElement);
 
         inputElement.parentElement.insertBefore(pError, inputElement);
         return false;
     } else {
-        console.log("okay");
         return true;
     }
 }
@@ -254,9 +253,7 @@ document.getElementById("add_player_form").addEventListener("submit", function (
             newPlayer.physical = parseInt(document.getElementById("physical").value);
         }
 
-        const playerId = document.getElementById("save_player_btn").getAttribute("data-player-id");
-        console.log(document.getElementById("save_player_btn"));
-        
+        const playerId = document.getElementById("save_player_btn").getAttribute("data-player-id");        
 
         // Create a new player if playerId is empty
         if (playerId === "") {
