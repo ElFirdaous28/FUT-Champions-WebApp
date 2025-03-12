@@ -142,12 +142,17 @@ function addPlayerToSquad(e){
         }
         // add to substitues
         if(addTo==="add_to_substitues"){
-            const clickedPlayerId=e.target.closest(".player_item").getAttribute('data-player-id');
+            const clickedPlayerId=e.target.closest(".player_item").parentElement.getAttribute('data-player-id');
             console.log(clickedPosition); 
+            console.log(clickedPlayerId);
+            
+            
             if(!squads[currentSquadIndex].substitutesPlayers[clickedPosition].find(id=>id===clickedPlayerId)&& !Object.values(squads[currentSquadIndex].principalePlayers).includes(clickedPlayerId)){
                 // !Object.valuestake object and return array of values
                 squads[currentSquadIndex].substitutesPlayers[clickedPosition].push(clickedPlayerId);
                 localStorage.setItem("squads", JSON.stringify(squads));
+                console.log();
+                
             }  
             else{
                 console.log("player alredy in ");   
@@ -500,6 +505,7 @@ function generateCampoCard(playerData) {
         </div>`;
 }
 
+
 function showPlayersOnCampo() {
     const playerCart = document.querySelectorAll(".cart");
     const squadSubtitle = document.getElementById("squad_subtitle").value;
@@ -530,4 +536,3 @@ function showPlayersOnCampo() {
        }
     }
 }
-
