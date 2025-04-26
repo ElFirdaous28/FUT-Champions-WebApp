@@ -1,5 +1,5 @@
 async function loadData() {
-    const response = await fetch('../players.json');
+    const response = await fetch('js/players.json');
     if (!response.ok) {
         throw new Error('Network response was not ok');
     }
